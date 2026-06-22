@@ -1,3 +1,5 @@
+**Status:** ✅ Done (Mergeado em `development`)
+
 # TASK-006 - Criar estrutura de ambientes
 
 ## Objetivo

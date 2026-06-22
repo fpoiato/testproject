@@ -134,4 +134,4 @@ flowchart LR
 
 - [TASK-002 — Definir padrões de branch](../project-management/tasks/TASK-002.md)
 - [TASK-003 — Configurar proteção de branches](../project-management/tasks/TASK-003.md)
-- [EPIC-001 — Foundation](../project-management/tasks/EPIC-001.md)
+- [~EPIC-001 — Foundation~ ~~**✅ Concluído**~~](../project-management/tasks/EPIC-001.md)
