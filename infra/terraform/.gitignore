@@ -1,0 +1,22 @@
+# Terraform
+.terraform
+*.tfstate
+*.tfstate.*
+*.tfbackup
+!package.json
+.npm/
+override.tf
+override.tf.json
+_overrides.tf
+_override.tf.json
+debug.tfvars
+debug.tfvars.json
+local.tfvars
+local.tfvars.json
+.terraform.lock.hcl
+terraform.crash.log
+terraform.log
+
+# OS
+.DS_Store
+Thumbs.db
