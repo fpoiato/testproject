@@ -21,4 +21,4 @@ S (Small)
 - Status checks obrigatórios configurados (preparação para CI).
 
 ## Casos de Teste
-- [TC-003](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-003.md): Validar critérios da TASK-003
+- [TC-003](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-003.md): Validar critérios da TASK-003

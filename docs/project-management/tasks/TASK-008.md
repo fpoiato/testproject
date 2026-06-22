@@ -20,4 +20,4 @@ M (Medium)
 - OAC (Origin Access Control) habilitado garantindo acesso privado aos buckets.
 
 ## Casos de Teste
-- [TC-008](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-008.md): Validar critérios da TASK-008
+- [TC-008](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-008.md): Validar critérios da TASK-008

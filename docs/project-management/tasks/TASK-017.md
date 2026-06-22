@@ -19,4 +19,4 @@ M (Medium)
 - Etapa de deploy configurada especificamente acoplada e escutada na branch `test`.
 
 ## Casos de Teste
-- [TC-017](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-017.md): Validar critérios da TASK-017
+- [TC-017](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-017.md): Validar critérios da TASK-017

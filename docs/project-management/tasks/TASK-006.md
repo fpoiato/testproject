@@ -20,4 +20,4 @@ M (Medium)
 - Configuração definindo a segregação de recursos por stage/ambiente estruturada através de arquivos ou variáveis.
 
 ## Casos de Teste
-- [TC-006](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-006.md): Validar critérios da TASK-006
+- [TC-006](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-006.md): Validar critérios da TASK-006

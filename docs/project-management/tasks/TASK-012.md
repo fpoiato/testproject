@@ -21,4 +21,4 @@ M (Medium)
 - Código skeleton backend incluído retornando 200 OK.
 
 ## Casos de Teste
-- [TC-012](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-012.md): Validar critérios da TASK-012
+- [TC-012](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-012.md): Validar critérios da TASK-012

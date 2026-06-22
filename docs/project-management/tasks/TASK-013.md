@@ -20,4 +20,4 @@ S (Small)
 - Execução automática bloqueando o merge em caso de falha de lint ou de teste.
 
 ## Casos de Teste
-- [TC-013](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-013.md): Validar critérios da TASK-013
+- [TC-013](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-013.md): Validar critérios da TASK-013

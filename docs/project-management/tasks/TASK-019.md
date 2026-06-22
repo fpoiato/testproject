@@ -20,4 +20,4 @@ M (Medium)
 - Passo explícito de `Manual Approval` inserido no fluxo da pipeline antes de executar as alterações finais AWS.
 
 ## Casos de Teste
-- [TC-019](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-019.md): Validar critérios da TASK-019
+- [TC-019](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-019.md): Validar critérios da TASK-019

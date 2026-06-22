@@ -20,4 +20,4 @@ S (Small)
 - Políticas de acesso restrito (preparando para integração OAC/CloudFront) configuradas de forma segura.
 
 ## Casos de Teste
-- [TC-007](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-007.md): Validar critérios da TASK-007
+- [TC-007](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-007.md): Validar critérios da TASK-007

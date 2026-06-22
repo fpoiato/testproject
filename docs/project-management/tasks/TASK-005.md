@@ -10,7 +10,7 @@ Parte do [EPIC-001 (Foundation)](https://github.com/fpoiato/testproject/issues/2
 [#1 (TASK-001)](https://github.com/fpoiato/testproject/issues/1)
 
 ## Arquivos afetados
-- [docs/001-foundation/architecture.md](https://github.com/fpoiato/testproject/blob/main/docs/001-foundation/architecture.md)
+- [docs/architecture/architecture.md](https://github.com/fpoiato/testproject/blob/main/docs/architecture/architecture.md)
 - [README.md](https://github.com/fpoiato/testproject/blob/main/README.md)
 
 ## Estimativa de complexidade
@@ -22,4 +22,4 @@ M (Medium)
 - README.md contendo guia de setup inicial.
 
 ## Casos de Teste
-- [TC-005](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-005.md): Validar critérios da TASK-005
+- [TC-005](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-005.md): Validar critérios da TASK-005

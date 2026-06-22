@@ -21,4 +21,4 @@ M (Medium)
 - Integração com Cognito Authorizer definida como padrão para as rotas seguras.
 
 ## Casos de Teste
-- [TC-011](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-011.md): Validar critérios da TASK-011
+- [TC-011](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-011.md): Validar critérios da TASK-011

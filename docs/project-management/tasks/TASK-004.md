@@ -22,4 +22,4 @@ XS (Extra Small)
 - Templates de Issues para features e bugs criados e validados.
 
 ## Casos de Teste
-- [TC-004](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-004.md): Validar critérios da TASK-004
+- [TC-004](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-004.md): Validar critérios da TASK-004

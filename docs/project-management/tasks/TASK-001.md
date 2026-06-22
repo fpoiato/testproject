@@ -28,4 +28,4 @@ XS (Extra Small)
 - `README.md` principal na raiz criado com uma visão geral do projeto e links para as documentações na pasta `docs/`.
 
 ## Casos de Teste
-- [TC-001](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-001.md): Validar critérios da TASK-001
+- [TC-001](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-001.md): Validar critérios da TASK-001

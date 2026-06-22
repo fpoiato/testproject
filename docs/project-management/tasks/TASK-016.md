@@ -19,4 +19,4 @@ M (Medium)
 - Deploy em `development` sendo triggado automaticamente por mudanças rastreadas na branch `development`.
 
 ## Casos de Teste
-- [TC-016](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-016.md): Validar critérios da TASK-016
+- [TC-016](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-016.md): Validar critérios da TASK-016

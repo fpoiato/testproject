@@ -20,4 +20,4 @@ M (Medium)
 - Permissões de IAM granulares (roles) atreladas aos CodeBuilds configuradas.
 
 ## Casos de Teste
-- [TC-014](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-014.md): Validar critérios da TASK-014
+- [TC-014](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-014.md): Validar critérios da TASK-014

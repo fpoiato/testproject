@@ -20,4 +20,4 @@ S (Small)
 - Nomes de tabela prefixados com o nome do ambiente de deploy.
 
 ## Casos de Teste
-- [TC-009](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-009.md): Validar critérios da TASK-009
+- [TC-009](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-009.md): Validar critérios da TASK-009

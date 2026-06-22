@@ -20,4 +20,4 @@ L (Large)
 - Conexão nativa com o GitHub Actions/Webhooks ou AWS CodeStar configurada para puxar o código base.
 
 ## Casos de Teste
-- [TC-015](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-015.md): Validar critérios da TASK-015
+- [TC-015](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-015.md): Validar critérios da TASK-015

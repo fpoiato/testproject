@@ -19,4 +19,4 @@ M (Medium)
 - Etapa de deploy configurada acoplada à branch `staging` e promovendo adequadamente o release.
 
 ## Casos de Teste
-- [TC-018](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-018.md): Validar critérios da TASK-018
+- [TC-018](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-018.md): Validar critérios da TASK-018

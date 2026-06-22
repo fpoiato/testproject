@@ -10,7 +10,7 @@ Parte do [EPIC-001 (Foundation)](https://github.com/fpoiato/testproject/issues/2
 [#1 (TASK-001)](https://github.com/fpoiato/testproject/issues/1)
 
 ## Arquivos afetados
-- [docs/001-foundation/branch-strategy.md](https://github.com/fpoiato/testproject/blob/main/docs/001-foundation/branch-strategy.md)
+- [docs/guides/branch-strategy.md](https://github.com/fpoiato/testproject/blob/main/docs/guides/branch-strategy.md)
 
 ## Estimativa de complexidade
 S (Small)
@@ -20,4 +20,4 @@ S (Small)
 - Fluxo de promoção entre ambientes documentado detalhadamente.
 
 ## Casos de Teste
-- [TC-002](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-002.md): Validar critérios da TASK-002
+- [TC-002](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-002.md): Validar critérios da TASK-002

@@ -21,4 +21,4 @@ L (Large)
 - Políticas de MFA exigindo TOTP (Authenticator App) implementadas obrigatoriamente.
 
 ## Casos de Teste
-- [TC-010](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-010.md): Validar critérios da TASK-010
+- [TC-010](https://github.com/fpoiato/testproject/blob/main/docs/test-cases/TC-010.md): Validar critérios da TASK-010
