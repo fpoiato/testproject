@@ -23,3 +23,29 @@ output "dynamodb_veiculos_stream_arn" {
   description = "ARN of the DynamoDB Veiculos table stream (if enabled)"
   value       = aws_dynamodb_table.veiculos.stream_arn
 }
+
+# Cognito Outputs
+output "cognito_user_pool_id" {
+  description = "Cognito User Pool ID"
+  value       = aws_cognito_user_pool.main.id
+}
+
+output "cognito_user_pool_arn" {
+  description = "Cognito User Pool ARN"
+  value       = aws_cognito_user_pool.main.arn
+}
+
+output "cognito_user_pool_endpoint" {
+  description = "Cognito User Pool Endpoint"
+  value       = aws_cognito_user_pool.main.endpoint
+}
+
+output "cognito_user_pool_client_id" {
+  description = "Cognito SPA Client ID"
+  value       = aws_cognito_user_pool_client.spa.id
+}
+
+output "cognito_identity_pool_id" {
+  description = "Cognito Identity Pool ID"
+  value       = aws_cognito_identity_pool.main.id
+}

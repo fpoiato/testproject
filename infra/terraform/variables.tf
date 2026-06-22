@@ -59,3 +59,76 @@ variable "dynamodb_enable_stream" {
   type        = bool
   default     = false
 }
+
+# Cognito Variables
+variable "cognito_email_source_arn" {
+  description = "SES email source ARN (required in production)"
+  type        = string
+  default     = "arn:aws:ses:us-east-1:123456789012:identity/testproject@fpoiato.com"
+}
+
+variable "cognito_email_reply_to" {
+  description = "Email reply-to address for Cognito"
+  type        = string
+  default     = "noreply@fpoiato.com"
+}
+
+variable "cognito_mfa_required" {
+  description = "Require MFA for all users"
+  type        = bool
+  default     = true
+}
+
+variable "cognito_password_policy_min_length" {
+  description = "Minimum password length"
+  type        = number
+  default     = 12
+}
+
+variable "cognito_require_lowercase" {
+  description = "Require lowercase letters in password"
+  type        = bool
+  default     = true
+}
+
+variable "cognito_require_uppercase" {
+  description = "Require uppercase letters in password"
+  type        = bool
+  default     = true
+}
+
+variable "cognito_require_numbers" {
+  description = "Require numbers in password"
+  type        = bool
+  default     = true
+}
+
+variable "cognito_require_symbols" {
+  description = "Require symbols in password"
+  type        = bool
+  default     = true
+}
+
+variable "cognito_callback_urls" {
+  description = "Allowed callback URLs for OAuth flows"
+  type        = list(string)
+  default     = ["http://localhost:4200"]
+}
+
+variable "cognito_logout_urls" {
+  description = "Allowed logout URLs"
+  type        = list(string)
+  default     = ["http://localhost:4200"]
+}
+
+variable "cognito_sms_external_user_id" {
+  description = "External user ID for SMS configuration"
+  type        = string
+  default     = "testproject"
+}
+
+variable "cognito_sms_caller_arn" {
+  description = "SNS caller ARN for SMS messages"
+  type        = string
+  default     = "arn:aws:iam::123456789012:role/testproject-sms-role"
+}
