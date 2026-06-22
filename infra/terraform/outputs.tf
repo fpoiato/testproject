@@ -77,3 +77,57 @@ output "api_gateway_deployment_id" {
 }
 
 # Note: invoke_url will be available after CDK (TASK-012) creates resources and methods
+
+# ========================================
+# CodeBuild Project Outputs
+# ========================================
+
+output "codebuild_backend_project_id" {
+  description = "CodeBuild Backend Project ID"
+  value       = aws_codebuild_project.backend.id
+}
+
+output "codebuild_backend_project_arn" {
+  description = "CodeBuild Backend Project ARN"
+  value       = aws_codebuild_project.backend.arn
+}
+
+output "codebuild_backend_project_name" {
+  description = "CodeBuild Backend Project Name"
+  value       = aws_codebuild_project.backend.name
+}
+
+output "codebuild_frontend_project_id" {
+  description = "CodeBuild Frontend Project ID"
+  value       = aws_codebuild_project.frontend.id
+}
+
+output "codebuild_frontend_project_arn" {
+  description = "CodeBuild Frontend Project ARN"
+  value       = aws_codebuild_project.frontend.arn
+}
+
+output "codebuild_frontend_project_name" {
+  description = "CodeBuild Frontend Project Name"
+  value       = aws_codebuild_project.frontend.name
+}
+
+output "codebuild_backend_log_group_arn" {
+  description = "CodeBuild Backend Log Group ARN"
+  value       = aws_cloudwatch_log_group.codebuild_backend.arn
+}
+
+output "codebuild_backend_log_group_name" {
+  description = "CodeBuild Backend Log Group Name"
+  value       = aws_cloudwatch_log_group.codebuild_backend.name
+}
+
+output "codebuild_frontend_log_group_arn" {
+  description = "CodeBuild Frontend Log Group ARN"
+  value       = aws_cloudwatch_log_group.codebuild_frontend.arn
+}
+
+output "codebuild_frontend_log_group_name" {
+  description = "CodeBuild Frontend Log Group Name"
+  value       = aws_cloudwatch_log_group.codebuild_frontend.name
+}
