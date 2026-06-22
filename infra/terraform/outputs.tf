@@ -49,3 +49,29 @@ output "cognito_identity_pool_id" {
   description = "Cognito Identity Pool ID"
   value       = aws_cognito_identity_pool.main.id
 }
+
+# API Gateway Outputs
+output "api_gateway_rest_api_id" {
+  description = "API Gateway REST API ID"
+  value       = aws_api_gateway_rest_api.main.id
+}
+
+output "api_gateway_rest_api_root_resource_id" {
+  description = "API Gateway REST API Root Resource ID"
+  value       = aws_api_gateway_rest_api.main.root_resource_id
+}
+
+output "api_gateway_execution_arn" {
+  description = "API Gateway Execution ARN"
+  value       = aws_api_gateway_rest_api.main.execution_arn
+}
+
+output "api_gateway_invoke_url" {
+  description = "API Gateway Invoke URL"
+  value       = aws_api_gateway_stage.main.invoke_url
+}
+
+output "api_gateway_deployment_id" {
+  description = "API Gateway Deployment ID"
+  value       = aws_api_gateway_deployment.main.id
+}

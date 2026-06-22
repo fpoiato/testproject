@@ -132,3 +132,41 @@ variable "cognito_sms_caller_arn" {
   type        = string
   default     = "arn:aws:iam::123456789012:role/testproject-sms-role"
 }
+
+# API Gateway Variables
+variable "api_gateway_description" {
+  description = "Description for API Gateway REST API"
+  type        = string
+  default     = "TestProject Backend API"
+}
+
+variable "api_gateway_stage_name" {
+  description = "API Gateway stage name (should match environment)"
+  type        = string
+}
+
+variable "api_gateway_endpoint_type" {
+  description = "API Gateway endpoint type: REGIONAL, PRIVATE, or EDGE"
+  type        = string
+  validation {
+    condition     = contains(["REGIONAL", "PRIVATE", "EDGE"], var.api_gateway_endpoint_type)
+    error_message = "Endpoint type must be REGIONAL, PRIVATE, or EDGE"
+  }
+  default = "REGIONAL"
+}
+
+variable "api_gateway_binary_media_types" {
+  description = "Binary media types supported by API Gateway"
+  type        = list(string)
+  default     = []
+}
+
+variable "api_gateway_minimum_compression_size" {
+  description = "Minimum response size to compress (in bytes)"
+  type        = number
+  default     = 1024 # 1KB default compression threshold
+  validation {
+    condition     = can(var.api_gateway_minimum_compression_size >= 0 && var.api_gateway_minimum_compression_size <= 10485760)
+    error_message = "Minimum compression size must be between 0 and 10485760"
+  }
+}
