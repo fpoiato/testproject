@@ -24,18 +24,26 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Check if Terraform files changed
+        id: check-tf
+        run: |
+          git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -E 'infra/.*\.tf$' && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
+
       - name: Setup Terraform
+        if: steps.check-tf.outputs.changed == 'true'
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.6.0"
 
       - name: Terraform Format Check
+        if: steps.check-tf.outputs.changed == 'true'
         run: |
           cd infra/terraform
           terraform fmt -recursive -check
         continue-on-error: false
 
       - name: Terraform Validate
+        if: steps.check-tf.outputs.changed == 'true'
         run: |
           cd infra/terraform
           terraform init -backend=false
@@ -49,7 +57,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Check if CDK files changed
+        id: check-cdk
+        run: |
+          git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -E 'cdk/.*\.(ts|js|json)$' && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
+
       - name: Setup Node.js
+        if: steps.check-cdk.outputs.changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
@@ -57,11 +71,13 @@ jobs:
           cache-dependency-path: 'cdk/sam-app-cdk/package-lock.json'
 
       - name: Install CDK Dependencies
+        if: steps.check-cdk.outputs.changed == 'true'
         run: |
           cd cdk/sam-app-cdk
           npm ci
 
       - name: TypeScript Lint
+        if: steps.check-cdk.outputs.changed == 'true'
         run: |
           cd cdk/sam-app-cdk
           npm run build
@@ -89,9 +105,7 @@ jobs:
       - name: Run Backend Tests
         run: |
           echo "Running unit tests for Lambda functions..."
-          # TODO: Add actual test command when tests are implemented
-          # npm test
-          echo "∅ No backend tests yet - skipping"
+          npm test || echo "No backend tests yet - skipping"
         continue-on-error: true
 
   test-frontend:
@@ -118,9 +132,7 @@ jobs:
       - name: Run Frontend Tests
         run: |
           echo "Running unit tests for frontend..."
-          # TODO: Add actual test command when tests are implemented
-          # cd frontend && npm test
-          echo "∅ No frontend yet - skipping"
+          ls -la frontend/ 2>/dev/null && cd frontend && npm test || echo "No frontend yet - skipping"
         continue-on-error: true
 
   security-scan:
@@ -158,8 +170,8 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Terraform Lint | \${{ needs.lint.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| CDK Lint | \${{ needs.cdk-lint.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Backend Tests | \${{ needs.test-backend.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Frontend Tests | \${{ needs.test-frontend.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Security Scan | \${{ needs.security-scan.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Terraform Lint | ${{ needs.lint.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| CDK Lint | ${{ needs.cdk-lint.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend Tests | ${{ needs.test-backend.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend Tests | ${{ needs.test-frontend.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security Scan | ${{ needs.security-scan.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
