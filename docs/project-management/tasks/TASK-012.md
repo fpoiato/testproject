@@ -1,20 +1,23 @@
 # TASK-012 - Criar Lambdas base
 
 ## Objetivo
-Criar Lambdas base
+Declarar funções AWS Lambda em node.js (placeholders para o CRUD de Veículos) no IaC e vinculá-las ao API Gateway via aliases por stage.
 
 ## Contexto
-Parte do EPIC-002. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-002 (AWS Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#11 (TASK-011)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/api_stack.*, backend/src/handlers/*
 
 ## Estimativa de complexidade
-A definir.
+M (Medium)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Lambdas provisionadas com permissão de execução via API Gateway.
+- Código skeleton backend incluído retornando 200 OK.
+
+## Casos de Teste
+- [TC-012](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-012.md): Validar critérios da TASK-012

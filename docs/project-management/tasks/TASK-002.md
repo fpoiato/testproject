@@ -1,20 +1,23 @@
 # TASK-002 - Definir padrões de branch
 
 ## Objetivo
-Definir padrões de branch
+Documentar e configurar as regras de nomenclatura de branches (feature/, bugfix/, hotfix/) e fluxo de merge (development -> test -> staging -> production).
 
 ## Contexto
-Parte do EPIC-001. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-001 (Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#1 (TASK-001)
 
 ## Arquivos afetados
-A definir.
+- docs/001-foundation/branch-strategy.md
 
 ## Estimativa de complexidade
-A definir.
+S (Small)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Documento de estratégia de branches criado.
+- Fluxo de promoção entre ambientes documentado detalhadamente.
+
+## Casos de Teste
+- [TC-002](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-002.md): Validar critérios da TASK-002

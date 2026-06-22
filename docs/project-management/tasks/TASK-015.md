@@ -1,20 +1,23 @@
 # TASK-015 - CodePipeline
 
 ## Objetivo
-CodePipeline
+Provisionar o AWS CodePipeline via IaC para orquestrar as entregas contínuas extraindo fontes do GitHub e encaminhando para CodeBuild.
 
 ## Contexto
-Parte do EPIC-003. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-003 (CI/CD).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#14 (TASK-014)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/pipeline_stack.*
 
 ## Estimativa de complexidade
-A definir.
+L (Large)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Estrutura do CodePipeline criada.
+- Conexão nativa com o GitHub Actions/Webhooks ou AWS CodeStar configurada para puxar o código base.
+
+## Casos de Teste
+- [TC-015](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-015.md): Validar critérios da TASK-015

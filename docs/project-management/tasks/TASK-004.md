@@ -1,20 +1,23 @@
 # TASK-004 - Criar templates GitHub
 
 ## Objetivo
-Criar templates GitHub
+Criar templates de PR e Issue no diretório `.github/` para padronizar as contribuições.
 
 ## Contexto
-Parte do EPIC-001. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-001 (Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#1 (TASK-001)
 
 ## Arquivos afetados
-A definir.
+- .github/ISSUE_TEMPLATE/*.md, .github/PULL_REQUEST_TEMPLATE.md
 
 ## Estimativa de complexidade
-A definir.
+XS (Extra Small)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Template de Pull Request contendo seções de Objetivo, Testes, e Checklists.
+- Templates de Issues para features e bugs criados e validados.
+
+## Casos de Teste
+- [TC-004](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-004.md): Validar critérios da TASK-004

@@ -1,20 +1,23 @@
 # TASK-009 - Criar DynamoDB
 
 ## Objetivo
-Criar DynamoDB
+Declarar no IaC a tabela DynamoDB principal para a entidade `Veiculos`, com configuração atrelada ao ambiente.
 
 ## Contexto
-Parte do EPIC-002. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-002 (AWS Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#6 (TASK-006)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/database_stack.*
 
 ## Estimativa de complexidade
-A definir.
+S (Small)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Tabela DynamoDB `Veiculos` declarada com Partition Key definida de forma padronizada.
+- Nomes de tabela prefixados com o nome do ambiente de deploy.
+
+## Casos de Teste
+- [TC-009](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-009.md): Validar critérios da TASK-009

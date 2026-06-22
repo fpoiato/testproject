@@ -1,20 +1,23 @@
 # TASK-006 - Criar estrutura de ambientes
 
 ## Objetivo
-Criar estrutura de ambientes
+Inicializar o projeto IaC configurando os pilares para os 4 ambientes (dev, test, stg, prod) na mesma conta AWS.
 
 ## Contexto
-Parte do EPIC-002. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-002 (AWS Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#1 (TASK-001)
 
 ## Arquivos afetados
-A definir.
+- infra/*
 
 ## Estimativa de complexidade
-A definir.
+M (Medium)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Projeto IaC base inicializado na pasta `infra/`.
+- Configuração definindo a segregação de recursos por stage/ambiente estruturada através de arquivos ou variáveis.
+
+## Casos de Teste
+- [TC-006](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-006.md): Validar critérios da TASK-006

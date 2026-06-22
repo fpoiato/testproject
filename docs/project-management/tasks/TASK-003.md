@@ -1,20 +1,24 @@
 # TASK-003 - Configurar proteção de branches
 
 ## Objetivo
-Configurar proteção de branches
+Aplicar regras de branch protection no GitHub para as branches `development`, `test`, `staging` e `production`.
 
 ## Contexto
-Parte do EPIC-001. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-001 (Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#2 (TASK-002)
 
 ## Arquivos afetados
-A definir.
+- Configuração no GitHub (sem código no repo) ou script de automação via GitHub CLI.
 
 ## Estimativa de complexidade
-A definir.
+S (Small)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Pushes diretos bloqueados nas branches protegidas.
+- PRs exigem review antes de merge.
+- Status checks obrigatórios configurados (preparação para CI).
+
+## Casos de Teste
+- [TC-003](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-003.md): Validar critérios da TASK-003

@@ -1,20 +1,23 @@
 # TASK-014 - CodeBuild
 
 ## Objetivo
-CodeBuild
+Provisionar Projetos no AWS CodeBuild via IaC para realizar as rotinas de build e testes do Backend e Frontend nas contas AWS.
 
 ## Contexto
-Parte do EPIC-003. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-003 (CI/CD).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#6 (TASK-006)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/pipeline_stack.*
 
 ## Estimativa de complexidade
-A definir.
+M (Medium)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Projetos do CodeBuild para backend e frontend declarados no IaC.
+- Permissões de IAM granulares (roles) atreladas aos CodeBuilds configuradas.
+
+## Casos de Teste
+- [TC-014](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-014.md): Validar critérios da TASK-014

@@ -1,20 +1,22 @@
 # TASK-016 - Deploy Development
 
 ## Objetivo
-Deploy Development
+Configurar a etapa do Pipeline para deploy automático no stage `development` a partir de pushes/merges na branch `development`.
 
 ## Contexto
-Parte do EPIC-003. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-003 (CI/CD).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#15 (TASK-015)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/pipeline_stack.*
 
 ## Estimativa de complexidade
-A definir.
+M (Medium)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Deploy em `development` sendo triggado automaticamente por mudanças rastreadas na branch `development`.
+
+## Casos de Teste
+- [TC-016](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-016.md): Validar critérios da TASK-016

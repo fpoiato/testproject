@@ -1,20 +1,23 @@
 # TASK-008 - Criar distribuições CloudFront
 
 ## Objetivo
-Criar distribuições CloudFront
+Declarar a CDN CloudFront no IaC para servir o conteúdo dos Buckets S3 do Frontend, utilizando OAC (Origin Access Control) para segurança.
 
 ## Contexto
-Parte do EPIC-002. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-002 (AWS Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#7 (TASK-007)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/frontend_stack.*
 
 ## Estimativa de complexidade
-A definir.
+M (Medium)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Distribuições CloudFront declaradas apontando para os respectivos buckets de cada stage.
+- OAC (Origin Access Control) habilitado garantindo acesso privado aos buckets.
+
+## Casos de Teste
+- [TC-008](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-008.md): Validar critérios da TASK-008

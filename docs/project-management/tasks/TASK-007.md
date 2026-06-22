@@ -1,20 +1,23 @@
 # TASK-007 - Criar buckets frontend
 
 ## Objetivo
-Criar buckets frontend
+Declarar os S3 Buckets no IaC para a hospedagem do SPA Angular, provendo um bucket isolado por ambiente.
 
 ## Contexto
-Parte do EPIC-002. Define o contrato de execução para esta funcionalidade.
+Parte do EPIC-002 (AWS Foundation).
 
 ## Dependências
-A definir durante o planejamento da sprint.
+#6 (TASK-006)
 
 ## Arquivos afetados
-A definir.
+- infra/stacks/frontend_stack.* (ou equivalente IaC)
 
 ## Estimativa de complexidade
-A definir.
+S (Small)
 
 ## Critérios de aceite
-- Funcionalidade implementada sem quebrar a build.
-- Validado de ponta a ponta.
+- Buckets S3 declarados no IaC.
+- Políticas de acesso restrito (preparando para integração OAC/CloudFront) configuradas de forma segura.
+
+## Casos de Teste
+- [TC-007](https://github.com/fpoiato/testproject/blob/main/docs/007-testing/test-cases/TC-007.md): Validar critérios da TASK-007
