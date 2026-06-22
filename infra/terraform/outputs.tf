@@ -79,8 +79,53 @@ output "api_gateway_deployment_id" {
 # Note: invoke_url will be available after CDK (TASK-012) creates resources and methods
 
 # ========================================
-# CodeBuild Project Outputs
+# CodePipeline Outputs
 # ========================================
+
+output "codepipeline_backend_id" {
+  description = "CodePipeline Backend ID"
+  value       = aws_codepipeline.backend.id
+}
+
+output "codepipeline_backend_arn" {
+  description = "CodePipeline Backend ARN"
+  value       = aws_codepipeline.backend.arn
+}
+
+output "codepipeline_backend_name" {
+  description = "CodePipeline Backend Name"
+  value       = aws_codepipeline.backend.name
+}
+
+output "codepipeline_frontend_id" {
+  description = "CodePipeline Frontend ID"
+  value       = aws_codepipeline.frontend.id
+}
+
+output "codepipeline_frontend_arn" {
+  description = "CodePipeline Frontend ARN"
+  value       = aws_codepipeline.frontend.arn
+}
+
+output "codepipeline_frontend_name" {
+  description = "CodePipeline Frontend Name"
+  value       = aws_codepipeline.frontend.name
+}
+
+output "codepipeline_artifacts_bucket_name" {
+  description = "CodePipeline Artifacts S3 Bucket Name"
+  value       = aws_s3_bucket.codepipeline_artifacts.bucket
+}
+
+output "codepipeline_artifacts_bucket_arn" {
+  description = "CodePipeline Artifacts S3 Bucket ARN"
+  value       = aws_s3_bucket.codepipeline_artifacts.arn
+}
+
+output "codepipeline_alerts_topic_arn" {
+  description = "Pipeline Alerts SNS Topic ARN"
+  value       = aws_sns_topic.pipeline_alerts.arn
+}
 
 output "codebuild_backend_project_id" {
   description = "CodeBuild Backend Project ID"
