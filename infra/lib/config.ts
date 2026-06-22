@@ -1,4 +1,9 @@
-export type EnvironmentName = 'development' | 'test' | 'staging' | 'production';
+export type EnvironmentName =
+  | 'development'
+  | 'test'
+  | 'staging'
+  | 'production-blue'
+  | 'production-green';
 
 export interface EnvironmentConfig {
   envName: EnvironmentName;
@@ -28,8 +33,13 @@ export const ENVIRONMENTS: Record<EnvironmentName, EnvironmentConfig> = {
     account: process.env.CDK_DEFAULT_ACCOUNT ?? '123456789012',
     region: process.env.CDK_DEFAULT_REGION ?? 'us-east-1',
   },
-  production: {
-    envName: 'production',
+  'production-blue': {
+    envName: 'production-blue',
+    account: process.env.CDK_DEFAULT_ACCOUNT ?? '123456789012',
+    region: process.env.CDK_DEFAULT_REGION ?? 'us-east-1',
+  },
+  'production-green': {
+    envName: 'production-green',
     account: process.env.CDK_DEFAULT_ACCOUNT ?? '123456789012',
     region: process.env.CDK_DEFAULT_REGION ?? 'us-east-1',
   },
