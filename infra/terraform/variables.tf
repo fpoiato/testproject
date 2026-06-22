@@ -17,3 +17,17 @@ variable "aws_account_id" {
   description = "AWS account ID"
   type        = string
 }
+
+variable "cloudfront_domain" {
+  description = "CloudFront custom domain (e.g., dev.testproject.fpoiato.com)"
+  type        = string
+  validation {
+    condition     = can(regex("^[a-z0-9.-]*$", var.cloudfront_domain))
+    error_message = "Domain must contain only lowercase letters, numbers, dots, and hyphens"
+  }
+}
+
+variable "acm_certificate_arn" {
+  description = "ACM certificate ARN for the custom domain (must be in us-east-1 for CloudFront)"
+  type        = string
+}

@@ -55,11 +55,20 @@ terraform destroy -var-file="dev.tfvars"
 ## Resources
 
 - **S3 Bucket:** One per environment for frontend static assets
+- **CloudFront Distribution:** CDN in front of S3 buckets
+- **S3 Origin Access Control (OAC):** Private bucket access for CloudFront
 - **Security:**
   - Enforce SSL/TLS (HTTPS only)
   - Block all public access
   - Server-side encryption (AES256)
   - Versioning disabled (cost optimization for SPA)
+  - CloudFront OAC ensures bucket remains private
+
+## Domains
+
+Custom domains are configured per environment: | Environment | Domain | |------------|--------| | development | `dev.testproject.fpoiato.com` | | test | `test.testproject.fpoiato.com` | | staging | `staging.testproject.fpoiato.com` | | production-blue | `blue.testproject.fpoiato.com` | | production-green | `green.testproject.fpoiato.com` |
+
+See [ADR-001](../../docs/architecture/adr-001-dns-domains.md) for full DNS strategy.
 
 ## State Management
 
@@ -67,6 +76,6 @@ terraform destroy -var-file="dev.tfvars"
 
 ## Project Context
 
-Part of **TASK-007** in the `testproject` repository.
+Part of **TASK-007** and **TASK-008** in the `testproject` repository.
 
-For migration from CDK context: previously the same resources were provisioned via CDK (`FeatureStack` and `infra/bin/infra.ts`); they are now managed through this Terraform configuration per the project's adopted IaC tooling preference.
+
