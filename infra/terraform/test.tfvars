@@ -23,3 +23,7 @@ cognito_callback_urls              = ["https://test.testproject.fpoiato.com"]
 cognito_logout_urls                = ["https://test.testproject.fpoiato.com"]
 cognito_sms_external_user_id       = "testproject"
 cognito_sms_caller_arn             = "arn:aws:iam::123456789012:role/testproject-sms-role"
+
+# API Gateway
+api_gateway_stage_name    = "test"
+api_gateway_endpoint_type = "REGIONAL"

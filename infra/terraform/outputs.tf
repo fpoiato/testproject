@@ -49,3 +49,31 @@ output "cognito_identity_pool_id" {
   description = "Cognito Identity Pool ID"
   value       = aws_cognito_identity_pool.main.id
 }
+
+# API Gateway Outputs (base infrastructure)
+output "api_gateway_rest_api_id" {
+  description = "API Gateway REST API ID"
+  value       = aws_api_gateway_rest_api.main.id
+}
+
+output "api_gateway_rest_api_name" {
+  description = "API Gateway REST API Name"
+  value       = aws_api_gateway_rest_api.main.name
+}
+
+output "api_gateway_execution_arn" {
+  description = "API Gateway Execution ARN"
+  value       = aws_api_gateway_rest_api.main.execution_arn
+}
+
+output "api_gateway_stage_name" {
+  description = "API Gateway Stage Name"
+  value       = aws_api_gateway_stage.main.stage_name
+}
+
+output "api_gateway_deployment_id" {
+  description = "API Gateway Deployment ID"
+  value       = aws_api_gateway_deployment.main.id
+}
+
+# Note: invoke_url will be available after CDK (TASK-012) creates resources and methods

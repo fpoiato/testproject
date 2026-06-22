@@ -23,3 +23,7 @@ cognito_callback_urls              = ["http://localhost:4200"]
 cognito_logout_urls                = ["http://localhost:4200"]
 cognito_sms_external_user_id       = "testproject-dev"
 cognito_sms_caller_arn             = "arn:aws:iam::123456789012:role/testproject-dev-sms"
+
+# API Gateway
+api_gateway_stage_name    = "development"
+api_gateway_endpoint_type = "REGIONAL"
