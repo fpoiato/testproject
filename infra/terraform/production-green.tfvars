@@ -1,3 +1,5 @@
-environment   = "production-green"
-aws_region   = "us-east-1"
-aws_account_id = "123456789012"
+environment           = "production-green"
+aws_region           = "us-east-1"
+aws_account_id       = "123456789012"
+cloudfront_domain    = "green.testproject.fpoiato.com"
+acm_certificate_arn  = "arn:aws:acm:us-east-1:123456789012:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
