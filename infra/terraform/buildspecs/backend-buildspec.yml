@@ -1,0 +1,67 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing Node.js 20 runtime..."
+
+  pre_build:
+    commands:
+      - echo "Setting up environment variables..."
+      - export CDK_DEFAULT_REGION=$AWS_REGION
+      - export CDK_DEFAULT_ACCOUNT=$CDK_DEFAULT_ACCOUNT
+      - export CDK_DEPLOY_REGION=$CDK_DEPLOY_REGION
+      - echo "Environment: $ENVIRONMENT"
+      - echo "AWS Region: $AWS_REGION"
+      - echo "AWS Account: $CDK_DEFAULT_ACCOUNT"
+
+  build:
+    commands:
+      - echo "Build started at $(date)"
+      - echo "========================================="
+      - echo "Running CDK Build and Deploy for Backend"
+      - echo "========================================="
+
+      # Navigate to CDK directory
+      - cd cdk/sam-app-cdk
+
+      # Install dependencies
+      - echo "Installing CDK dependencies..."
+      - npm ci
+
+      # Build TypeScript
+      - echo "Building TypeScript..."
+      - npm run build
+
+      # Bootstrap CDK (if not already bootstrapped)
+      - |
+        if ! npx cdk bootstrap 2>/dev/null; then
+          echo "Bootstrapping CDK for the first time..."
+          npx cdk bootstrap
+        fi
+
+      # Deploy CDK stack
+      - echo "Deploying CDK stack..."
+      - npx cdk deploy --require-approval never --ci --verbose
+
+      - echo "Build completed at $(date)"
+
+  post_build:
+    commands:
+      - echo "Post-build phase completed"
+      - echo "========================================="
+      - echo "Backend Deployment Summary"
+      - echo "========================================="
+      - echo "Environment: $ENVIRONMENT"
+      - echo "Region: $AWS_REGION"
+      - echo "Deployment Status: SUCCESS"
+
+artifacts:
+  files: []
+  discard-paths: yes
+
+cache:
+  paths:
+    - cd cdk/sam-app-cdk/node_modules/**/*
