@@ -10,7 +10,11 @@ Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issu
 [#6 (TASK-006)](https://github.com/fpoiato/testproject/issues/6)
 
 ## Arquivos afetados
-- [infra/stacks/frontend_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/frontend_stack.) (ou equivalente IaC)
+- [infra/terraform/main.tf](https://github.com/fpoiato/testproject/tree/main/infra/terraform/main.tf)
+- [infra/terraform/frontend.tf](https://github.com/fpoiato/testproject/tree/main/infra/terraform/frontend.tf)
+- [infra/terraform/variables.tf](https://github.com/fpoiato/testproject/tree/main/infra/terraform/variables.tf)
+- [infra/terraform/outputs.tf](https://github.com/fpoiato/testproject/tree/main/infra/terraform/outputs.tf)
+- [infra/terraform/*.tfvars](https://github.com/fpoiato/testproject/tree/main/infra/terraform/) (dev, test, staging, production-blue, production-green)
 
 ## Estimativa de complexidade
 S (Small)

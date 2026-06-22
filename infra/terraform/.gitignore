@@ -1,0 +1,14 @@
+# Terraform state files
+*.tfstate
+*.tfstate.*
+*.terraform.lock.hcl
+.terraform/
+
+# Terraform variables with sensitive data
+*.auto.tfvars
+!dev.tfvars
+!test.tfvars
+!staging.tfvars
+!production-blue.tfvars
+!production-green.tfvars
+!example.tfvars
