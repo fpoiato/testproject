@@ -170,3 +170,17 @@ variable "cdn_domain_name" {
   type        = string
   default     = ""
 }
+
+# Pipeline alert email
+variable "pipeline_alert_email" {
+  description = "Email address for CodePipeline failure alerts (TASK-015)"
+  type        = string
+  default     = ""
+}
+
+# Pipeline alert email
+variable "pipeline_alert_email" {
+  description = "Email address for CodePipeline failure alerts (TASK-015)"
+  type        = string
+  default     = ""
+}
