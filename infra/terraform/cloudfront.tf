@@ -1,8 +1,8 @@
 # CloudFront Distribution for frontend S3 hosting
 resource "aws_cloudfront_distribution" "frontend" {
-  enabled             = true
-  is_ipv6_enabled     = true
-  price_class         = "PriceClass_100" # US/Europe (cheapest, expand as needed)
+  enabled         = true
+  is_ipv6_enabled = true
+  price_class     = "PriceClass_100" # US/Europe (cheapest, expand as needed)
 
   origin {
     domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
@@ -31,7 +31,7 @@ resource "aws_cloudfront_distribution" "frontend" {
 
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
-    default_ttl            = 86400 # 24 hours
+    default_ttl            = 86400    # 24 hours
     max_ttl                = 31536000 # 1 year
 
     # Compress text-based assets
@@ -45,7 +45,7 @@ resource "aws_cloudfront_distribution" "frontend" {
     }
   }
 
- # Custom domain aliases
+  # Custom domain aliases
   aliases = [var.cloudfront_domain]
 
   # Default root object
@@ -96,12 +96,12 @@ resource "aws_s3_bucket_policy" "frontend_cloudfront" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowCloudFrontOAC"
-        Effect    = "Allow"
+        Sid    = "AllowCloudFrontOAC"
+        Effect = "Allow"
         Principal = {
           Service = "cloudfront.amazonaws.com"
         }
-        Action    = "s3:GetObject"
+        Action = "s3:GetObject"
         Resource = [
           "${aws_s3_bucket.frontend.arn}/*",
         ]
