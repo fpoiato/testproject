@@ -4,13 +4,13 @@
 Configurar workflows base do GitHub Actions para validação de Pull Requests contendo rotinas de lint e test (quando houver).
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#1 (TASK-001)
+[#1 (TASK-001)](https://github.com/fpoiato/testproject/issues/1)
 
 ## Arquivos afetados
-- .github/workflows/pr-validation.yml
+- [.github/workflows/pr-validation.yml](https://github.com/fpoiato/testproject/blob/main/.github/workflows/pr-validation.yml)
 
 ## Estimativa de complexidade
 S (Small)

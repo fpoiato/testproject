@@ -4,13 +4,14 @@
 Declarar funções AWS Lambda em node.js (placeholders para o CRUD de Veículos) no IaC e vinculá-las ao API Gateway via aliases por stage.
 
 ## Contexto
-Parte do EPIC-002 (AWS Foundation).
+Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issues/21).
 
 ## Dependências
-#11 (TASK-011)
+[#11 (TASK-011)](https://github.com/fpoiato/testproject/issues/11)
 
 ## Arquivos afetados
-- infra/stacks/api_stack.*, backend/src/handlers/*
+- [infra/stacks/api_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/api_stack.)
+- [backend/src/handlers/](https://github.com/fpoiato/testproject/tree/main/backend/src/handlers)
 
 ## Estimativa de complexidade
 M (Medium)

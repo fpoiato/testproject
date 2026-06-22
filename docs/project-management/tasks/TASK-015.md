@@ -4,13 +4,13 @@
 Provisionar o AWS CodePipeline via IaC para orquestrar as entregas contínuas extraindo fontes do GitHub e encaminhando para CodeBuild.
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#14 (TASK-014)
+[#14 (TASK-014)](https://github.com/fpoiato/testproject/issues/14)
 
 ## Arquivos afetados
-- infra/stacks/pipeline_stack.*
+- [infra/stacks/pipeline_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/pipeline_stack.)
 
 ## Estimativa de complexidade
 L (Large)

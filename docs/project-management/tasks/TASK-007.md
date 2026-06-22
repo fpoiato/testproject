@@ -4,13 +4,13 @@
 Declarar os S3 Buckets no IaC para a hospedagem do SPA Angular, provendo um bucket isolado por ambiente.
 
 ## Contexto
-Parte do EPIC-002 (AWS Foundation).
+Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issues/21).
 
 ## Dependências
-#6 (TASK-006)
+[#6 (TASK-006)](https://github.com/fpoiato/testproject/issues/6)
 
 ## Arquivos afetados
-- infra/stacks/frontend_stack.* (ou equivalente IaC)
+- [infra/stacks/frontend_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/frontend_stack.) (ou equivalente IaC)
 
 ## Estimativa de complexidade
 S (Small)

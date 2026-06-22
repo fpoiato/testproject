@@ -4,13 +4,13 @@
 Configurar a etapa de deploy automático no CodePipeline para o stage `test` quando a branch `test` receber pushes via PR merge.
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#16 (TASK-016)
+[#16 (TASK-016)](https://github.com/fpoiato/testproject/issues/16)
 
 ## Arquivos afetados
-- infra/stacks/pipeline_stack.*
+- [infra/stacks/pipeline_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/pipeline_stack.)
 
 ## Estimativa de complexidade
 M (Medium)

@@ -4,13 +4,13 @@
 Configurar a etapa de deploy automático para o stage `staging`, disparada por atualizações na branch `staging`.
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#17 (TASK-017)
+[#17 (TASK-017)](https://github.com/fpoiato/testproject/issues/17)
 
 ## Arquivos afetados
-- infra/stacks/pipeline_stack.*
+- [infra/stacks/pipeline_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/pipeline_stack.)
 
 ## Estimativa de complexidade
 M (Medium)

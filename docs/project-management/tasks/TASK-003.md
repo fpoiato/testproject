@@ -4,10 +4,10 @@
 Aplicar regras de branch protection no GitHub para as branches `development`, `test`, `staging` e `production`.
 
 ## Contexto
-Parte do EPIC-001 (Foundation).
+Parte do [EPIC-001 (Foundation)](https://github.com/fpoiato/testproject/issues/20).
 
 ## Dependências
-#2 (TASK-002)
+[#2 (TASK-002)](https://github.com/fpoiato/testproject/issues/2)
 
 ## Arquivos afetados
 - Configuração no GitHub (sem código no repo) ou script de automação via GitHub CLI.

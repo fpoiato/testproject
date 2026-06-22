@@ -4,13 +4,13 @@
 Inicializar o projeto IaC configurando os pilares para os 4 ambientes (dev, test, stg, prod) na mesma conta AWS.
 
 ## Contexto
-Parte do EPIC-002 (AWS Foundation).
+Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issues/21).
 
 ## Dependências
-#1 (TASK-001)
+[#1 (TASK-001)](https://github.com/fpoiato/testproject/issues/1)
 
 ## Arquivos afetados
-- infra/*
+- [infra/](https://github.com/fpoiato/testproject/tree/main/infra)
 
 ## Estimativa de complexidade
 M (Medium)

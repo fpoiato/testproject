@@ -4,13 +4,13 @@
 Documentar e configurar as regras de nomenclatura de branches (feature/, bugfix/, hotfix/) e fluxo de merge (development -> test -> staging -> production).
 
 ## Contexto
-Parte do EPIC-001 (Foundation).
+Parte do [EPIC-001 (Foundation)](https://github.com/fpoiato/testproject/issues/20).
 
 ## Dependências
-#1 (TASK-001)
+[#1 (TASK-001)](https://github.com/fpoiato/testproject/issues/1)
 
 ## Arquivos afetados
-- docs/001-foundation/branch-strategy.md
+- [docs/001-foundation/branch-strategy.md](https://github.com/fpoiato/testproject/blob/main/docs/001-foundation/branch-strategy.md)
 
 ## Estimativa de complexidade
 S (Small)

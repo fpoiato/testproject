@@ -4,13 +4,13 @@
 Configurar no IaC o Amazon Cognito User Pool para gerenciar o auto cadastro, confirmação por e-mail e exigência de MFA via aplicativo autenticador.
 
 ## Contexto
-Parte do EPIC-002 (AWS Foundation).
+Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issues/21).
 
 ## Dependências
-#6 (TASK-006)
+[#6 (TASK-006)](https://github.com/fpoiato/testproject/issues/6)
 
 ## Arquivos afetados
-- infra/stacks/auth_stack.*
+- [infra/stacks/auth_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/auth_stack.)
 
 ## Estimativa de complexidade
 L (Large)

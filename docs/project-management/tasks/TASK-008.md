@@ -4,13 +4,13 @@
 Declarar a CDN CloudFront no IaC para servir o conteúdo dos Buckets S3 do Frontend, utilizando OAC (Origin Access Control) para segurança.
 
 ## Contexto
-Parte do EPIC-002 (AWS Foundation).
+Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issues/21).
 
 ## Dependências
-#7 (TASK-007)
+[#7 (TASK-007)](https://github.com/fpoiato/testproject/issues/7)
 
 ## Arquivos afetados
-- infra/stacks/frontend_stack.*
+- [infra/stacks/frontend_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/frontend_stack.)
 
 ## Estimativa de complexidade
 M (Medium)

@@ -4,13 +4,13 @@
 Configurar a etapa do Pipeline para deploy automático no stage `development` a partir de pushes/merges na branch `development`.
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#15 (TASK-015)
+[#15 (TASK-015)](https://github.com/fpoiato/testproject/issues/15)
 
 ## Arquivos afetados
-- infra/stacks/pipeline_stack.*
+- [infra/stacks/pipeline_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/pipeline_stack.)
 
 ## Estimativa de complexidade
 M (Medium)

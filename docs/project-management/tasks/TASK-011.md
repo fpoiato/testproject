@@ -4,13 +4,13 @@
 Declarar no IaC a base do API Gateway REST com os stages dinâmicos (`development`, `test`, `staging`, `production`).
 
 ## Contexto
-Parte do EPIC-002 (AWS Foundation).
+Parte do [EPIC-002 (AWS Foundation)](https://github.com/fpoiato/testproject/issues/21).
 
 ## Dependências
-#6 (TASK-006), #10 (TASK-010)
+[#6 (TASK-006)](https://github.com/fpoiato/testproject/issues/6), [#10 (TASK-010)](https://github.com/fpoiato/testproject/issues/10)
 
 ## Arquivos afetados
-- infra/stacks/api_stack.*
+- [infra/stacks/api_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/api_stack.)
 
 ## Estimativa de complexidade
 M (Medium)

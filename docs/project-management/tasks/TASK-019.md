@@ -4,13 +4,13 @@
 Configurar a etapa de deploy para `production` a partir da branch `production`, exigindo obrigatoriamente um portão de aprovação manual (Manual Approval) no Pipeline.
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#18 (TASK-018)
+[#18 (TASK-018)](https://github.com/fpoiato/testproject/issues/18)
 
 ## Arquivos afetados
-- infra/stacks/pipeline_stack.*
+- [infra/stacks/pipeline_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/pipeline_stack.)
 
 ## Estimativa de complexidade
 M (Medium)

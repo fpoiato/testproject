@@ -4,13 +4,13 @@
 Provisionar Projetos no AWS CodeBuild via IaC para realizar as rotinas de build e testes do Backend e Frontend nas contas AWS.
 
 ## Contexto
-Parte do EPIC-003 (CI/CD).
+Parte do [EPIC-003 (CI/CD)](https://github.com/fpoiato/testproject/issues/22).
 
 ## Dependências
-#6 (TASK-006)
+[#6 (TASK-006)](https://github.com/fpoiato/testproject/issues/6)
 
 ## Arquivos afetados
-- infra/stacks/pipeline_stack.*
+- [infra/stacks/pipeline_stack.*](https://github.com/fpoiato/testproject/tree/main/infra/stacks/pipeline_stack.)
 
 ## Estimativa de complexidade
 M (Medium)
