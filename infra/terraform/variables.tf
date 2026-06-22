@@ -170,3 +170,10 @@ variable "api_gateway_minimum_compression_size" {
     error_message = "Minimum compression size must be between 0 and 10485760"
   }
 }
+
+# Pipeline alert email
+variable "pipeline_alert_email" {
+  description = "Email address for CodePipeline failure alerts (TASK-015)"
+  type        = string
+  default     = ""
+}
