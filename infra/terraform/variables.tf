@@ -30,9 +30,9 @@ variable "project_name" {
   default     = "testproject"
 }
 
-# GitHub OAuth token for CodeBuild and CodePipeline source authentication
+# GitHub OAuth token for CodeBuild source authentication
 variable "github_oauth_token" {
-  description = "GitHub OAuth token for CodeBuild and CodePipeline source authentication"
+  description = "GitHub OAuth token for CodeBuild source authentication"
   type        = string
   sensitive   = true
   default     = ""
@@ -45,24 +45,17 @@ variable "codebuild_log_retention_days" {
   default     = 7
 }
 
-# Pipeline alert email
-variable "pipeline_alert_email" {
-  description = "Email address for CodePipeline failure alerts"
-  type        = string
-  default     = ""
-}
-
 # ========================================
 # S3 Variables
 # ========================================
 
-variable "s3_versioning_enabled" {
+variable "s3_versioning" {
   description = "Enable S3 versioning"
   type        = bool
   default     = true
 }
 
-variable "s3_lifecycle_transition_days" {
+variable "s3_lifecycle Days" {
   description = "Days before transitioning to Standard-IA"
   type        = number
   default     = 30
@@ -75,7 +68,7 @@ variable "s3_lifecycle_transition_days" {
 variable "cloudfront_price_class" {
   description = "CloudFront price class"
   type        = string
-  default     = "PriceClass_100"  # US, Canada, Europe
+  default     = "PriceClass_100" # US, Canada, Europe
   validation {
     condition     = contains(["PriceClass_All", "PriceClass_200", "PriceClass_100"], var.cloudfront_price_class)
     error_message = "CloudFront price class must be one of: PriceClass_All, PriceClass_200, PriceClass_100"
@@ -177,3 +170,12 @@ variable "cdn_domain_name" {
   type        = string
   default     = ""
 }
+
+# Pipeline alert email
+variable "pipeline_alert_email" {
+  description = "Email address for CodePipeline failure alerts (TASK-015)"
+  type        = string
+  default     = ""
+}
+
+# Pipeline alert email
