@@ -1,0 +1,621 @@
+{
+  "/SamAppStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Component",
+          "value": "Lambda"
+        },
+        {
+          "key": "Environment",
+          "value": "development"
+        },
+        {
+          "key": "Project",
+          "value": "testproject"
+        }
+      ]
+    }
+  ],
+  "/SamAppStack/ApiInvokeUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiInvokeUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:146:5)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SamAppStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SamAppStack/CognitoAuthorizer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CognitoAuthorizerF3215DBC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CognitoUserPoolsAuthorizer2 in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:37:31)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/GetVeiculosFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetVeiculosFunctionEA7B03D0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:47:32)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/CreateVeiculoFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CreateVeiculoFunction14AE873F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:53:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/GetVeiculoFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetVeiculoFunction93CC1573"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:59:31)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/UpdateVeiculoFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UpdateVeiculoFunction6F235318"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:65:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/DeleteVeiculoFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeleteVeiculoFunctionA14B8A77"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:71:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Deployment37BBD5E4bfb02aa7e439f1b0bfa3f9f4b8f1008d"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Deployment2 in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:133:24)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/Stage/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Stage0E8C2AF5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Stage2 in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:141:19)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SamAppStack/GetVeiculosFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetVeiculosFunctionServiceRole6C9EF5A0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:47:32)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/CreateVeiculoFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CreateVeiculoFunctionServiceRoleA42CCC2B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:53:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/GetVeiculoFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetVeiculoFunctionServiceRole80B03BB4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:59:31)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/UpdateVeiculoFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UpdateVeiculoFunctionServiceRole60D01561"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:65:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/DeleteVeiculoFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeleteVeiculoFunctionServiceRole4ACAC77D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:158:16)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:71:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculos1E5CDEF6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:84:35)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/GetVeiculosFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetVeiculosFunctionServiceRoleDefaultPolicy6CE8C2EC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:172:8)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:47:32)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SamAppStack/CreateVeiculoFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CreateVeiculoFunctionServiceRoleDefaultPolicy952AC578"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:172:8)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:53:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SamAppStack/GetVeiculoFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GetVeiculoFunctionServiceRoleDefaultPolicy3E86A3FC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:172:8)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:59:31)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SamAppStack/UpdateVeiculoFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UpdateVeiculoFunctionServiceRoleDefaultPolicyA0DD34D4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:172:8)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:65:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SamAppStack/DeleteVeiculoFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeleteVeiculoFunctionServiceRoleDefaultPolicyF9C11AF0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "SamAppStack.createLambdaFunction (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:172:8)",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:71:34)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/GET/ApiPermission.SamAppStackImportedApiGatewayA211E365.GET..veiculos": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosGETApiPermissionSamAppStackImportedApiGatewayA211E365GETveiculosF6C27B99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:87:48)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/GET/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.GET..veiculos": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosGETApiPermissionTestSamAppStackImportedApiGatewayA211E365GETveiculos13B3BF50"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:87:48)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosGETAB02AF71"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:87:48)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/POST/ApiPermission.SamAppStackImportedApiGatewayA211E365.POST..veiculos": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosPOSTApiPermissionSamAppStackImportedApiGatewayA211E365POSTveiculos684D92CA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:93:50)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/POST/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.POST..veiculos": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosPOSTApiPermissionTestSamAppStackImportedApiGatewayA211E365POSTveiculosCE3B97AA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:93:50)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosPOST8493D49C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:93:50)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaC0E58E24"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:99:52)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/GET/ApiPermission.SamAppStackImportedApiGatewayA211E365.GET..veiculos.{placa}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaGETApiPermissionSamAppStackImportedApiGatewayA211E365GETveiculosplaca0ED6ABB7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:102:52)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/GET/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.GET..veiculos.{placa}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaGETApiPermissionTestSamAppStackImportedApiGatewayA211E365GETveiculosplaca61F42F37"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:102:52)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaGET4157B047"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:102:52)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/PUT/ApiPermission.SamAppStackImportedApiGatewayA211E365.PUT..veiculos.{placa}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaPUTApiPermissionSamAppStackImportedApiGatewayA211E365PUTveiculosplaca594E5AEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:108:55)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/PUT/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.PUT..veiculos.{placa}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaPUTApiPermissionTestSamAppStackImportedApiGatewayA211E365PUTveiculosplaca7D1A7F9F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:108:55)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaPUT2FFF8CDB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:108:55)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/DELETE/ApiPermission.SamAppStackImportedApiGatewayA211E365.DELETE..veiculos.{placa}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaDELETEApiPermissionSamAppStackImportedApiGatewayA211E365DELETEveiculosplaca5D88B87D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:114:55)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/DELETE/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.DELETE..veiculos.{placa}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaDELETEApiPermissionTestSamAppStackImportedApiGatewayA211E365DELETEveiculosplaca631E8EFE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:114:55)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/DELETE/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImportedApiGatewayveiculosplacaDELETE3DB0945F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new SamAppStack (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\lib\\sam-app-stack.ts:114:55)",
+        "<anonymous> (c:\\testproject\\testproject\\cdk\\sam-app-cdk\\bin\\sam-app.ts:21:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ]
+}

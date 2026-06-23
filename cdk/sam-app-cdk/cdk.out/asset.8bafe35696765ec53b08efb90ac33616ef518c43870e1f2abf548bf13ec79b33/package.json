@@ -1,0 +1,16 @@
+{
+  "name": "get-veiculos-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function to list all Veiculos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0"
+  }
+}

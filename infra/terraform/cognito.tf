@@ -14,11 +14,12 @@ resource "aws_cognito_user_pool" "main" {
   # Auto-verified attributes
   auto_verified_attributes = ["email"]
 
-  # Email configuration
+  # Email configuration (DEVELOPER mode so Cognito sends via the verified
+  # SES identity in var.cognito_email_source_arn)
   email_configuration {
-    email_sending_account = "COGNITO_DEFAULT"
-    source_arn            = var.cognito_email_source_arn
-    reply_to_email        = var.cognito_email_reply_to
+    email_sending_account  = "DEVELOPER"
+    source_arn             = var.cognito_email_source_arn
+    reply_to_email_address = var.cognito_email_reply_to
   }
 
   # Password policy
@@ -54,12 +55,12 @@ resource "aws_cognito_user_pool" "main" {
 
   # SMS verification (enabled but MFA uses TOTP)
   sms_configuration {
-    external_user_id = var.cognito_sms_external_user_id
-    sns_caller_arn   = var.cognito_sms_caller_arn
+    external_id    = var.cognito_sms_external_user_id
+    sns_caller_arn = aws_iam_role.cognito_sms.arn
   }
 
   # Device tracking
-  device_tracking {
+  device_configuration {
     challenge_required_on_new_device      = false
     device_only_remembered_on_user_prompt = false
   }
@@ -78,7 +79,7 @@ resource "aws_cognito_user_pool_client" "spa" {
 
   name                          = "testproject-spa-${var.environment}"
   generate_secret               = false # PKCE for public clients
-  prevent_user_existence_errors = true
+  prevent_user_existence_errors = "ENABLED"
 
   # Allowed OAuth flows
   allowed_oauth_flows  = ["implicit", "code"] # PKCE uses code flow
@@ -96,10 +97,14 @@ resource "aws_cognito_user_pool_client" "spa" {
   ]
 
   # Token configuration
+  access_token_validity  = 1  # 1 hour
+  id_token_validity      = 1  # 1 hour
+  refresh_token_validity = 30 # 30 days
+
   token_validity_units {
-    access_token  = 1  # 1 hour
-    id_token      = 1  # 1 hour
-    refresh_token = 30 # 30 days
+    access_token  = "hours"
+    id_token      = "hours"
+    refresh_token = "days"
   }
 
   # Read attributes
@@ -218,8 +223,7 @@ resource "aws_iam_role_policy" "authenticated" {
 resource "aws_cognito_identity_pool_roles_attachment" "main" {
   identity_pool_id = aws_cognito_identity_pool.main.id
 
-  roles {
-    authenticated   = aws_iam_role.authenticated.arn
-    unauthenticated = "" # No unauthenticated access
+  roles = {
+    authenticated = aws_iam_role.authenticated.arn
   }
 }

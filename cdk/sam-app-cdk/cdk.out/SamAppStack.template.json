@@ -1,0 +1,1016 @@
+{
+ "Description": "SamApp Lambda Stack for development environment",
+ "Resources": {
+  "ImportedApiGatewayveiculos1E5CDEF6": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": "o4zjagsesj",
+    "PathPart": "veiculos",
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/Resource"
+   }
+  },
+  "ImportedApiGatewayveiculosGETApiPermissionSamAppStackImportedApiGatewayA211E365GETveiculosF6C27B99": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "GetVeiculosFunctionEA7B03D0",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/*/GET/veiculos"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/GET/ApiPermission.SamAppStackImportedApiGatewayA211E365.GET..veiculos"
+   }
+  },
+  "ImportedApiGatewayveiculosGETApiPermissionTestSamAppStackImportedApiGatewayA211E365GETveiculos13B3BF50": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "GetVeiculosFunctionEA7B03D0",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/test-invoke-stage/GET/veiculos"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/GET/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.GET..veiculos"
+   }
+  },
+  "ImportedApiGatewayveiculosGETAB02AF71": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "GetVeiculosFunctionEA7B03D0",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "ImportedApiGatewayveiculos1E5CDEF6"
+    },
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/GET/Resource"
+   }
+  },
+  "ImportedApiGatewayveiculosPOSTApiPermissionSamAppStackImportedApiGatewayA211E365POSTveiculos684D92CA": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CreateVeiculoFunction14AE873F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/*/POST/veiculos"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/POST/ApiPermission.SamAppStackImportedApiGatewayA211E365.POST..veiculos"
+   }
+  },
+  "ImportedApiGatewayveiculosPOSTApiPermissionTestSamAppStackImportedApiGatewayA211E365POSTveiculosCE3B97AA": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CreateVeiculoFunction14AE873F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/test-invoke-stage/POST/veiculos"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/POST/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.POST..veiculos"
+   }
+  },
+  "ImportedApiGatewayveiculosPOST8493D49C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CreateVeiculoFunction14AE873F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "ImportedApiGatewayveiculos1E5CDEF6"
+    },
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/POST/Resource"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaC0E58E24": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "ImportedApiGatewayveiculos1E5CDEF6"
+    },
+    "PathPart": "{placa}",
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/Resource"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaGETApiPermissionSamAppStackImportedApiGatewayA211E365GETveiculosplaca0ED6ABB7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "GetVeiculoFunction93CC1573",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/*/GET/veiculos/*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/GET/ApiPermission.SamAppStackImportedApiGatewayA211E365.GET..veiculos.{placa}"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaGETApiPermissionTestSamAppStackImportedApiGatewayA211E365GETveiculosplaca61F42F37": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "GetVeiculoFunction93CC1573",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/test-invoke-stage/GET/veiculos/*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/GET/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.GET..veiculos.{placa}"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaGET4157B047": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "GetVeiculoFunction93CC1573",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "ImportedApiGatewayveiculosplacaC0E58E24"
+    },
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/GET/Resource"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaPUTApiPermissionSamAppStackImportedApiGatewayA211E365PUTveiculosplaca594E5AEB": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "UpdateVeiculoFunction6F235318",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/*/PUT/veiculos/*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/PUT/ApiPermission.SamAppStackImportedApiGatewayA211E365.PUT..veiculos.{placa}"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaPUTApiPermissionTestSamAppStackImportedApiGatewayA211E365PUTveiculosplaca7D1A7F9F": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "UpdateVeiculoFunction6F235318",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/test-invoke-stage/PUT/veiculos/*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/PUT/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.PUT..veiculos.{placa}"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaPUT2FFF8CDB": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "UpdateVeiculoFunction6F235318",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "ImportedApiGatewayveiculosplacaC0E58E24"
+    },
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/PUT/Resource"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaDELETEApiPermissionSamAppStackImportedApiGatewayA211E365DELETEveiculosplaca5D88B87D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DeleteVeiculoFunctionA14B8A77",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/*/DELETE/veiculos/*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/DELETE/ApiPermission.SamAppStackImportedApiGatewayA211E365.DELETE..veiculos.{placa}"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaDELETEApiPermissionTestSamAppStackImportedApiGatewayA211E365DELETEveiculosplaca631E8EFE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DeleteVeiculoFunctionA14B8A77",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": "arn:aws:execute-api:us-east-1:986873053420:x3iyeh68hk/test-invoke-stage/DELETE/veiculos/*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/DELETE/ApiPermission.Test.SamAppStackImportedApiGatewayA211E365.DELETE..veiculos.{placa}"
+   }
+  },
+  "ImportedApiGatewayveiculosplacaDELETE3DB0945F": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "DELETE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "DeleteVeiculoFunctionA14B8A77",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "ImportedApiGatewayveiculosplacaC0E58E24"
+    },
+    "RestApiId": "x3iyeh68hk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/ImportedApiGateway/Default/veiculos/{placa}/DELETE/Resource"
+   }
+  },
+  "CognitoAuthorizerF3215DBC": {
+   "Type": "AWS::ApiGateway::Authorizer",
+   "Properties": {
+    "IdentitySource": "method.request.header.Authorization",
+    "Name": "SamAppStackCognitoAuthorizerA2766C21",
+    "ProviderARNs": [
+     "arn:aws:cognito-idp:us-east-1:986873053420:userpool/us-east-1_JVhDuPoaJ"
+    ],
+    "RestApiId": "x3iyeh68hk",
+    "Type": "COGNITO_USER_POOLS"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/CognitoAuthorizer/Resource"
+   }
+  },
+  "GetVeiculosFunctionServiceRole6C9EF5A0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/GetVeiculosFunction/ServiceRole/Resource"
+   }
+  },
+  "GetVeiculosFunctionServiceRoleDefaultPolicy6CE8C2EC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:Query",
+        "dynamodb:Scan"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:dynamodb:us-east-1:986873053420:table/Veiculos-development"
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:logs:*:*:*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GetVeiculosFunctionServiceRoleDefaultPolicy6CE8C2EC",
+    "Roles": [
+     {
+      "Ref": "GetVeiculosFunctionServiceRole6C9EF5A0"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/GetVeiculosFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "GetVeiculosFunctionEA7B03D0": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-986873053420-us-east-1",
+     "S3Key": "8bafe35696765ec53b08efb90ac33616ef518c43870e1f2abf548bf13ec79b33.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE": "Veiculos-development",
+      "ENVIRONMENT": "development"
+     }
+    },
+    "FunctionName": "testproject-GetVeiculos-development",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "GetVeiculosFunctionServiceRole6C9EF5A0",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "GetVeiculosFunctionServiceRoleDefaultPolicy6CE8C2EC",
+    "GetVeiculosFunctionServiceRole6C9EF5A0"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/GetVeiculosFunction/Resource",
+    "aws:asset:path": "asset.8bafe35696765ec53b08efb90ac33616ef518c43870e1f2abf548bf13ec79b33",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CreateVeiculoFunctionServiceRoleA42CCC2B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/CreateVeiculoFunction/ServiceRole/Resource"
+   }
+  },
+  "CreateVeiculoFunctionServiceRoleDefaultPolicy952AC578": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "dynamodb:PutItem",
+       "Effect": "Allow",
+       "Resource": "arn:aws:dynamodb:us-east-1:986873053420:table/Veiculos-development"
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:logs:*:*:*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CreateVeiculoFunctionServiceRoleDefaultPolicy952AC578",
+    "Roles": [
+     {
+      "Ref": "CreateVeiculoFunctionServiceRoleA42CCC2B"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/CreateVeiculoFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "CreateVeiculoFunction14AE873F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-986873053420-us-east-1",
+     "S3Key": "ca2fa261dfd6f2c1d8a878a3185fd5cde2d6bc665b078e26bfa7982115c509f5.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE": "Veiculos-development",
+      "ENVIRONMENT": "development"
+     }
+    },
+    "FunctionName": "testproject-CreateVeiculo-development",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "CreateVeiculoFunctionServiceRoleA42CCC2B",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "CreateVeiculoFunctionServiceRoleDefaultPolicy952AC578",
+    "CreateVeiculoFunctionServiceRoleA42CCC2B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/CreateVeiculoFunction/Resource",
+    "aws:asset:path": "asset.ca2fa261dfd6f2c1d8a878a3185fd5cde2d6bc665b078e26bfa7982115c509f5",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "GetVeiculoFunctionServiceRole80B03BB4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/GetVeiculoFunction/ServiceRole/Resource"
+   }
+  },
+  "GetVeiculoFunctionServiceRoleDefaultPolicy3E86A3FC": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "dynamodb:GetItem",
+       "Effect": "Allow",
+       "Resource": "arn:aws:dynamodb:us-east-1:986873053420:table/Veiculos-development"
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:logs:*:*:*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "GetVeiculoFunctionServiceRoleDefaultPolicy3E86A3FC",
+    "Roles": [
+     {
+      "Ref": "GetVeiculoFunctionServiceRole80B03BB4"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/GetVeiculoFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "GetVeiculoFunction93CC1573": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-986873053420-us-east-1",
+     "S3Key": "a0c1e697ff95bcdfaf2603112a1b7763b1062173780dd345ef6a44eeaf2fdc97.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE": "Veiculos-development",
+      "ENVIRONMENT": "development"
+     }
+    },
+    "FunctionName": "testproject-GetVeiculo-development",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "GetVeiculoFunctionServiceRole80B03BB4",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "GetVeiculoFunctionServiceRoleDefaultPolicy3E86A3FC",
+    "GetVeiculoFunctionServiceRole80B03BB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/GetVeiculoFunction/Resource",
+    "aws:asset:path": "asset.a0c1e697ff95bcdfaf2603112a1b7763b1062173780dd345ef6a44eeaf2fdc97",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "UpdateVeiculoFunctionServiceRole60D01561": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/UpdateVeiculoFunction/ServiceRole/Resource"
+   }
+  },
+  "UpdateVeiculoFunctionServiceRoleDefaultPolicyA0DD34D4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "dynamodb:UpdateItem",
+       "Effect": "Allow",
+       "Resource": "arn:aws:dynamodb:us-east-1:986873053420:table/Veiculos-development"
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:logs:*:*:*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "UpdateVeiculoFunctionServiceRoleDefaultPolicyA0DD34D4",
+    "Roles": [
+     {
+      "Ref": "UpdateVeiculoFunctionServiceRole60D01561"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/UpdateVeiculoFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "UpdateVeiculoFunction6F235318": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-986873053420-us-east-1",
+     "S3Key": "d16b3004229103661f5f370e4a394964219e7da1bf988d3afb3d799080d5ab29.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE": "Veiculos-development",
+      "ENVIRONMENT": "development"
+     }
+    },
+    "FunctionName": "testproject-UpdateVeiculo-development",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "UpdateVeiculoFunctionServiceRole60D01561",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "UpdateVeiculoFunctionServiceRoleDefaultPolicyA0DD34D4",
+    "UpdateVeiculoFunctionServiceRole60D01561"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/UpdateVeiculoFunction/Resource",
+    "aws:asset:path": "asset.d16b3004229103661f5f370e4a394964219e7da1bf988d3afb3d799080d5ab29",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DeleteVeiculoFunctionServiceRole4ACAC77D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/DeleteVeiculoFunction/ServiceRole/Resource"
+   }
+  },
+  "DeleteVeiculoFunctionServiceRoleDefaultPolicyF9C11AF0": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "dynamodb:DeleteItem",
+       "Effect": "Allow",
+       "Resource": "arn:aws:dynamodb:us-east-1:986873053420:table/Veiculos-development"
+      },
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:logs:*:*:*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DeleteVeiculoFunctionServiceRoleDefaultPolicyF9C11AF0",
+    "Roles": [
+     {
+      "Ref": "DeleteVeiculoFunctionServiceRole4ACAC77D"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/DeleteVeiculoFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "DeleteVeiculoFunctionA14B8A77": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-986873053420-us-east-1",
+     "S3Key": "e63942d7a216c6ea93ae175cd42bcd9754ab3b3b136a5789607d1a4b3c5de56c.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DYNAMODB_TABLE": "Veiculos-development",
+      "ENVIRONMENT": "development"
+     }
+    },
+    "FunctionName": "testproject-DeleteVeiculo-development",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "DeleteVeiculoFunctionServiceRole4ACAC77D",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "DeleteVeiculoFunctionServiceRoleDefaultPolicyF9C11AF0",
+    "DeleteVeiculoFunctionServiceRole4ACAC77D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/DeleteVeiculoFunction/Resource",
+    "aws:asset:path": "asset.e63942d7a216c6ea93ae175cd42bcd9754ab3b3b136a5789607d1a4b3c5de56c",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "Deployment37BBD5E4bfb02aa7e439f1b0bfa3f9f4b8f1008d": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "RestApiId": "x3iyeh68hk"
+   },
+   "DependsOn": [
+    "ImportedApiGatewayveiculosplacaDELETEApiPermissionSamAppStackImportedApiGatewayA211E365DELETEveiculosplaca5D88B87D",
+    "ImportedApiGatewayveiculosplacaDELETEApiPermissionTestSamAppStackImportedApiGatewayA211E365DELETEveiculosplaca631E8EFE",
+    "ImportedApiGatewayveiculosplacaDELETE3DB0945F",
+    "ImportedApiGatewayveiculosplacaGETApiPermissionSamAppStackImportedApiGatewayA211E365GETveiculosplaca0ED6ABB7",
+    "ImportedApiGatewayveiculosplacaGETApiPermissionTestSamAppStackImportedApiGatewayA211E365GETveiculosplaca61F42F37",
+    "ImportedApiGatewayveiculosplacaGET4157B047",
+    "ImportedApiGatewayveiculosplacaPUTApiPermissionSamAppStackImportedApiGatewayA211E365PUTveiculosplaca594E5AEB",
+    "ImportedApiGatewayveiculosplacaPUTApiPermissionTestSamAppStackImportedApiGatewayA211E365PUTveiculosplaca7D1A7F9F",
+    "ImportedApiGatewayveiculosplacaPUT2FFF8CDB",
+    "ImportedApiGatewayveiculosGETApiPermissionSamAppStackImportedApiGatewayA211E365GETveiculosF6C27B99",
+    "ImportedApiGatewayveiculosGETApiPermissionTestSamAppStackImportedApiGatewayA211E365GETveiculos13B3BF50",
+    "ImportedApiGatewayveiculosGETAB02AF71",
+    "ImportedApiGatewayveiculosPOSTApiPermissionSamAppStackImportedApiGatewayA211E365POSTveiculos684D92CA",
+    "ImportedApiGatewayveiculosPOSTApiPermissionTestSamAppStackImportedApiGatewayA211E365POSTveiculosCE3B97AA",
+    "ImportedApiGatewayveiculosPOST8493D49C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "Stage0E8C2AF5": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "Deployment37BBD5E4bfb02aa7e439f1b0bfa3f9f4b8f1008d"
+    },
+    "RestApiId": "x3iyeh68hk",
+    "StageName": "development"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/Stage/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WPQW/CMAyFfwv34LEy7Q5Mu01DZTsjtzXFkMZV7Qx1Vf/7FCo2dnrfy0vslwyy5wUsZnjReVmd554LGHaG5dnhRfcDtlyj0QV7GHJSW7W8RiWXk0rsSvpn3OYQfvmN7ChVOrqR1IFNPpW6rYjXVbSjdPxNXbp0516o9dI3FCwFd25nWF+XXGF0HpuiQhg2h7ClrmFVluBeYygtweYQbjy6qg/YSFXABxZ+qs3YwJCLn3on3Yrnsk92otHpco+qZAqrJE6XsI7lmSxNGP9+fk1TLQ51ev8erY02uiAVwUkfvrIneMxgMTsp87yLwbghyCf9AZJbIPuFAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "SamAppStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ApiInvokeUrl": {
+   "Description": "Invoke URL for GET/POST /veiculos",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://x3iyeh68hk.execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "Stage0E8C2AF5"
+      },
+      "/veiculos"
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -70,25 +70,8 @@ resource "aws_codepipeline" "backend" {
     }
   }
 
-  stage {
-    name = "Deploy"
-
-    action {
-      name            = "Deploy"
-      category        = "Deploy"
-      owner           = "AWS"
-      provider        = "CodeDeploy" # Or use CodeBuild for CDK deployment
-      version         = "1"
-      input_artifacts = ["build_output"]
-
-      configuration = {
-        # Deployment configuration will be added when CodeDeploy is configured
-        # For now, we skip this stage since CDK handles deployment in build
-      }
-
-      run_order = 1
-    }
-  }
+  # Note: no separate Deploy stage - the Build stage (CodeBuild) runs
+  # `cdk deploy`, so CDK handles deployment directly.
 
   tags = {
     Project     = "testproject"
@@ -240,27 +223,8 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
   })
 }
 
-# Webhook for backend CodePipeline
-resource "aws_codestarconnections_connection" "backend" {
-  name          = "testproject-backend-connection-${var.environment}"
-  provider_type = "GitHub"
-
-  tags = {
-    Project     = "testproject"
-    Environment = var.environment
-  }
-}
-
-# Webhook for frontend CodePipeline
-resource "aws_codestarconnections_connection" "frontend" {
-  name          = "testproject-frontend-connection-${var.environment}"
-  provider_type = "GitHub"
-
-  tags = {
-    Project     = "testproject"
-    Environment = var.environment
-  }
-}
+# Note: CodeStarConnections resources removed - the pipeline uses the
+# GitHub v1 OAuth source action (var.github_oauth_token) with polling.
 
 # CloudWatch Alarms for CodePipeline failures
 resource "aws_cloudwatch_metric_alarm" "backend_pipeline_failure" {
@@ -276,9 +240,8 @@ resource "aws_cloudwatch_metric_alarm" "backend_pipeline_failure" {
   alarm_actions       = [aws_sns_topic.pipeline_alerts.arn]
   ok_actions          = [aws_sns_topic.pipeline_alerts.arn]
 
-  dimensions {
-    name  = "Pipeline"
-    value = aws_codepipeline.backend.name
+  dimensions = {
+    PipelineName = aws_codepipeline.backend.name
   }
 }
 
@@ -295,9 +258,8 @@ resource "aws_cloudwatch_metric_alarm" "frontend_pipeline_failure" {
   alarm_actions       = [aws_sns_topic.pipeline_alerts.arn]
   ok_actions          = [aws_sns_topic.pipeline_alerts.arn]
 
-  dimensions {
-    name  = "Pipeline"
-    value = aws_codepipeline.frontend.name
+  dimensions = {
+    PipelineName = aws_codepipeline.frontend.name
   }
 }
 

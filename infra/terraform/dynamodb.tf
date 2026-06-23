@@ -3,6 +3,7 @@
 resource "aws_dynamodb_table" "veiculos" {
   name         = "Veiculos-${var.environment}"
   billing_mode = var.dynamodb_billing_mode
+  hash_key     = "placa"
 
   # Single-table design with placa as partition key
   attribute {
@@ -32,19 +33,8 @@ resource "aws_dynamodb_table" "veiculos" {
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
   # Read/write capacity units (only used when billing_mode is PROVISIONED)
-  dynamic "read_capacity" {
-    for_each = var.dynamodb_billing_mode == "PROVISIONED" ? [1] : []
-    content {
-      value = var.dynamodb_read_capacity
-    }
-  }
-
-  dynamic "write_capacity" {
-    for_each = var.dynamodb_billing_mode == "PROVISIONED" ? [1] : []
-    content {
-      value = var.dynamodb_write_capacity
-    }
-  }
+  read_capacity  = var.dynamodb_billing_mode == "PROVISIONED" ? var.dynamodb_read_capacity : null
+  write_capacity = var.dynamodb_billing_mode == "PROVISIONED" ? var.dynamodb_write_capacity : null
 
   # Lifecycle configuration
   # Note: prevent_destroy cannot use function calls in Terraform

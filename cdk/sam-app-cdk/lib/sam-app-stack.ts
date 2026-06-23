@@ -8,17 +8,23 @@ import { Construct } from 'constructs';
 
 export interface SamAppStackProps extends cdk.StackProps {
   apiGatewayId: string;
+  apiGatewayRootResourceId: string;
   dynamoDbTableName: string;
   cognitoUserPoolId: string;
   cognitoUserPoolArn: string;
+  stageName: string;
 }
 
 export class SamAppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: SamAppStackProps) {
     super(scope, id, props);
 
-    // Import API Gateway from Terraform
-    const apiGateway = apigateway.RestApi.fromRestApiId(this, 'ImportedApiGateway', props.apiGatewayId);
+    // Import API Gateway from Terraform (root resource id is required so we
+    // can attach resources/methods to the imported REST API).
+    const apiGateway = apigateway.RestApi.fromRestApiAttributes(this, 'ImportedApiGateway', {
+      restApiId: props.apiGatewayId,
+      rootResourceId: props.apiGatewayRootResourceId,
+    });
 
     // Import DynamoDB table from Terraform
     const dynamoTable = dynamodb.Table.fromTableName(this, 'ImportedDynamoTable', props.dynamoDbTableName);
@@ -30,7 +36,7 @@ export class SamAppStack extends cdk.Stack {
     // Create Cognito JWT Authorizer
     const cognitoAuthorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'CognitoAuthorizer', {
       cognitoUserPools: [cognitoUserPool],
-      identitySource: 'Authorization',
+      identitySource: apigateway.IdentitySource.header('Authorization'),
     });
 
     // ========================================
@@ -78,13 +84,13 @@ export class SamAppStack extends cdk.Stack {
     const veiculosResource = root.addResource('veiculos');
 
     // GET /veiculos
-    veiculosResource.addMethod('GET', getVeiculosIntegration, {
+    const getVeiculosMethod = veiculosResource.addMethod('GET', getVeiculosIntegration, {
       authorizationType: apigateway.AuthorizationType.COGNITO,
       authorizer: cognitoAuthorizer,
     });
 
     // POST /veiculos
-    veiculosResource.addMethod('POST', createVeiculoIntegration, {
+    const createVeiculoMethod = veiculosResource.addMethod('POST', createVeiculoIntegration, {
       authorizationType: apigateway.AuthorizationType.COGNITO,
       authorizer: cognitoAuthorizer,
     });
@@ -93,21 +99,53 @@ export class SamAppStack extends cdk.Stack {
     const veiculosPlacaResource = veiculosResource.addResource('{placa}');
 
     // GET /veiculos/{placa}
-    veiculosPlacaResource.addMethod('GET', getVeiculoIntegration, {
+    const getVeiculoMethod = veiculosPlacaResource.addMethod('GET', getVeiculoIntegration, {
       authorizationType: apigateway.AuthorizationType.COGNITO,
       authorizer: cognitoAuthorizer,
     });
 
     // PUT /veiculos/{placa}
-    veiculosPlacaResource.addMethod('PUT', updateVeiculoIntegration, {
+    const updateVeiculoMethod = veiculosPlacaResource.addMethod('PUT', updateVeiculoIntegration, {
       authorizationType: apigateway.AuthorizationType.COGNITO,
       authorizer: cognitoAuthorizer,
     });
 
     // DELETE /veiculos/{placa}
-    veiculosPlacaResource.addMethod('DELETE', deleteVeiculoIntegration, {
+    const deleteVeiculoMethod = veiculosPlacaResource.addMethod('DELETE', deleteVeiculoIntegration, {
       authorizationType: apigateway.AuthorizationType.COGNITO,
       authorizer: cognitoAuthorizer,
+    });
+
+    // ========================================
+    // Deployment + Stage
+    // ========================================
+    // The base REST API is created by Terraform without any methods, so we
+    // create the deployment/stage here (after the methods exist) to make the
+    // API invokable.
+    const methods = [
+      getVeiculosMethod,
+      createVeiculoMethod,
+      getVeiculoMethod,
+      updateVeiculoMethod,
+      deleteVeiculoMethod,
+    ];
+
+    const deployment = new apigateway.Deployment(this, 'Deployment', {
+      api: apiGateway,
+    });
+    // Force a new deployment whenever the set of methods changes, and ensure
+    // the deployment is created only after every method.
+    deployment.addToLogicalId(methods.map((m) => m.methodId).join(','));
+    methods.forEach((m) => deployment.node.addDependency(m));
+
+    const stage = new apigateway.Stage(this, 'Stage', {
+      deployment,
+      stageName: props.stageName,
+    });
+
+    new cdk.CfnOutput(this, 'ApiInvokeUrl', {
+      value: stage.urlForPath('/veiculos'),
+      description: 'Invoke URL for GET/POST /veiculos',
     });
   }
 
@@ -121,7 +159,7 @@ export class SamAppStack extends cdk.Stack {
       functionName: `testproject-${name}-${this.node.tryGetContext('environment') ?? 'dev'}`,
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(`../../lambda/${codeDir}`),
+      code: lambda.Code.fromAsset(`../lambda/${codeDir}`),
       environment: {
         DYNAMODB_TABLE: dynamoTable.tableName,
         ENVIRONMENT: this.node.tryGetContext('environment') ?? 'dev',

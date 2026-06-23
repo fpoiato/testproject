@@ -13,6 +13,7 @@ const environment = app.node.tryGetContext('environment') ?? process.env.ENVIRON
 
 // Import Terraform outputs via environment variables
 const apiGatewayId = process.env.API_GATEWAY_ID ?? '';
+const apiGatewayRootResourceId = process.env.API_GATEWAY_ROOT_RESOURCE_ID ?? '';
 const dynamoDbTableName = process.env.DYNAMODB_TABLE_NAME ?? '';
 const cognitoUserPoolId = process.env.COGNITO_USER_POOL_ID ?? '';
 const cognitoUserPoolArn = process.env.COGNITO_USER_POOL_ARN ?? '';
@@ -30,7 +31,9 @@ new SamAppStack(app, 'SamAppStack', {
   },
   // Pass Terraform outputs as properties
   apiGatewayId,
+  apiGatewayRootResourceId,
   dynamoDbTableName,
   cognitoUserPoolId,
   cognitoUserPoolArn,
+  stageName: environment,
 });

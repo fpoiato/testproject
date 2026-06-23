@@ -61,22 +61,18 @@ output "api_gateway_rest_api_name" {
   value       = aws_api_gateway_rest_api.main.name
 }
 
+output "api_gateway_root_resource_id" {
+  description = "API Gateway root resource ID (needed by CDK to import the API)"
+  value       = aws_api_gateway_rest_api.main.root_resource_id
+}
+
 output "api_gateway_execution_arn" {
   description = "API Gateway Execution ARN"
   value       = aws_api_gateway_rest_api.main.execution_arn
 }
 
-output "api_gateway_stage_name" {
-  description = "API Gateway Stage Name"
-  value       = aws_api_gateway_stage.main.stage_name
-}
-
-output "api_gateway_deployment_id" {
-  description = "API Gateway Deployment ID"
-  value       = aws_api_gateway_deployment.main.id
-}
-
-# Note: invoke_url will be available after CDK (TASK-012) creates resources and methods
+# Note: the deployment/stage and invoke_url are created by the CDK stack
+# (cdk/sam-app-cdk) after it adds the methods.
 
 # ========================================
 # CodePipeline Outputs

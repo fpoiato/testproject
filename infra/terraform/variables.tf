@@ -27,9 +27,21 @@ variable "cloudfront_domain" {
   }
 }
 
-variable "acm_certificate_arn" {
-  description = "ACM certificate ARN for the custom domain (must be in us-east-1 for CloudFront)"
+# Note: ACM certificate is now created and DNS-validated in acm.tf
+# (previously this required a manually-provided ARN placeholder).
+
+# GitHub OAuth token for CodePipeline GitHub v1 source action.
+# Provide via gitignored github.auto.tfvars or TF_VAR_github_oauth_token.
+variable "github_oauth_token" {
+  description = "GitHub OAuth/PAT token used by the CodePipeline GitHub source action"
   type        = string
+  sensitive   = true
+}
+
+variable "codebuild_log_retention_days" {
+  description = "CloudWatch log retention (days) for CodeBuild log groups"
+  type        = number
+  default     = 7
 }
 
 # DynamoDB Variables

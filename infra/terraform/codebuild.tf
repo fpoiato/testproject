@@ -14,7 +14,7 @@ resource "aws_codebuild_project" "backend" {
 
   environment {
     compute_type = "BUILD_GENERAL1_SMALL"
-    image        = "aws/codebuild/amazonlinux2-aarch64-standard:5.0"
+    image        = "aws/codebuild/amazonlinux2-aarch64-standard:3.0"
     type         = "ARM_CONTAINER"
 
     environment_variable {
@@ -45,10 +45,8 @@ resource "aws_codebuild_project" "backend" {
     location        = "https://github.com/fpoiato/testproject.git"
     git_clone_depth = 1
 
-    auth {
-      type     = "OAUTH"
-      resource = var.github_oauth_token
-    }
+    # Public repo: no source credential needed. When invoked via CodePipeline
+    # the source is overridden by the pipeline's input artifact.
 
     buildspec = file("${path.module}/buildspecs/backend-buildspec.yml")
   }
@@ -74,7 +72,7 @@ resource "aws_codebuild_project" "frontend" {
 
   environment {
     compute_type = "BUILD_GENERAL1_SMALL"
-    image        = "aws/codebuild/amazonlinux2-aarch64-standard:5.0"
+    image        = "aws/codebuild/amazonlinux2-aarch64-standard:3.0"
     type         = "ARM_CONTAINER"
 
     environment_variable {
@@ -95,10 +93,8 @@ resource "aws_codebuild_project" "frontend" {
     location        = "https://github.com/fpoiato/testproject.git"
     git_clone_depth = 1
 
-    auth {
-      type     = "OAUTH"
-      resource = var.github_oauth_token
-    }
+    # Public repo: no source credential needed. When invoked via CodePipeline
+    # the source is overridden by the pipeline's input artifact.
 
     buildspec = file("${path.module}/buildspecs/frontend-buildspec.yml")
   }
@@ -251,7 +247,7 @@ resource "aws_iam_role_policy" "codebuild_frontend_policy" {
         Action = [
           "cloudfront:CreateInvalidation",
         ]
-        Resource = aws_cloudfront_distribution.main.arn
+        Resource = aws_cloudfront_distribution.frontend.arn
       },
     ]
   })
