@@ -6,19 +6,19 @@ Monorepo para a aplicação serverless na AWS, organizado em três camadas princ
 
 Este projeto adota uma arquitetura serverless com:
 
-- **Frontend** — interface web hospedada via CloudFront e S3
-- **Backend** — APIs REST implementadas com AWS Lambda e API Gateway
-- **Infraestrutura** — recursos AWS provisionados via AWS CDK (TypeScript)
+- **Frontend** — app Angular 19 hospedado via CloudFront e S3 (um por ambiente)
+- **Backend** — handlers Node.js (Lambda) atrás de um único API Gateway REST com stages por ambiente
+- **Infraestrutura** — recursos AWS provisionados via **Terraform** (state remoto em S3 + lock DynamoDB)
 
-Os serviços centrais incluem Amazon Cognito (autenticação), DynamoDB (persistência) e demais componentes definidos na documentação de arquitetura.
+Modelo compartilhado: um API Gateway com stages `development`/`test`/`staging`/`production`, onde a stage variable `lambdaAlias` seleciona o alias da Lambda. DynamoDB e Cognito são por ambiente. Detalhes em [ADR-003](docs/architecture/adr-003-terraform-shared-model.md).
 
 ## Estrutura do repositório
 
 ```
 testproject/
-├── frontend/   # Aplicação web
-├── backend/    # Handlers Lambda e lógica de API
-├── infra/      # Stacks AWS CDK
+├── frontend/   # App Angular (veículos, auth MFA, export Excel)
+├── backend/    # Handlers Lambda + Lambda Authorizer
+├── infra/      # Terraform (infra/terraform)
 └── docs/       # Documentação do projeto
 ```
 

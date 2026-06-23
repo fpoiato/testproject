@@ -1,0 +1,10 @@
+{
+  "name": "testproject-authorizer",
+  "version": "1.0.0",
+  "description": "Lambda Authorizer (TOKEN) que valida JWT do Cognito por stage/ambiente",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "aws-jwt-verify": "^4.0.1"
+  }
+}

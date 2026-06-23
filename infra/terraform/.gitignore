@@ -1,14 +1,13 @@
-# Terraform state files
+# Terraform state
 *.tfstate
 *.tfstate.*
-*.terraform.lock.hcl
 .terraform/
+.terraform.lock.hcl
 
-# Terraform variables with sensitive data
+# Sensitive auto-loaded vars (ex.: github.auto.tfvars)
 *.auto.tfvars
-!dev.tfvars
-!test.tfvars
-!staging.tfvars
-!production-blue.tfvars
-!production-green.tfvars
-!example.tfvars
+
+# Build artifacts
+.build/
+**/function.zip
+tfplan
