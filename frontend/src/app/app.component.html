@@ -1,0 +1,17 @@
+<header class="navbar">
+  <div class="brand">
+    <span class="logo">🚗</span>
+    <span class="title">TestProject — Veículos</span>
+    <span class="env-badge" [class]="envClass()">{{ environment() }}</span>
+  </div>
+  @if (auth.userEmail()) {
+    <div class="user">
+      <span class="email">{{ auth.userEmail() }}</span>
+      <button class="btn-ghost" (click)="logout()">Sair</button>
+    </div>
+  }
+</header>
+
+<main class="content">
+  <router-outlet />
+</main>
