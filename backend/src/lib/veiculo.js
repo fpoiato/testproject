@@ -1,9 +1,9 @@
-// Modelo de dados do veiculo: marca, modelo, versao, cor, ano.
+// Modelo de dados do veiculo: placa, marca, modelo, versao, cor, ano.
 const CURRENT_YEAR = new Date().getFullYear();
 const MIN_YEAR = 1900;
 const MAX_YEAR = CURRENT_YEAR + 2;
 
-const REQUIRED_STRING_FIELDS = ['marca', 'modelo', 'cor'];
+const REQUIRED_STRING_FIELDS = ['placa', 'marca', 'modelo', 'cor'];
 
 function validate(body, { partial = false } = {}) {
   const errors = [];
@@ -26,7 +26,7 @@ function validate(body, { partial = false } = {}) {
     }
   }
 
-  for (const field of ['marca', 'modelo', 'cor', 'versao']) {
+  for (const field of ['placa', 'marca', 'modelo', 'cor', 'versao']) {
     if (body[field] !== undefined && typeof body[field] !== 'string') {
       errors.push(`${field} deve ser texto`);
     }
@@ -38,6 +38,7 @@ function validate(body, { partial = false } = {}) {
 // Normaliza o payload mantendo apenas os campos do dominio.
 function normalize(body) {
   const out = {};
+  if (body.placa !== undefined) out.placa = String(body.placa).trim().toUpperCase();
   for (const field of ['marca', 'modelo', 'versao', 'cor']) {
     if (body[field] !== undefined) out[field] = String(body[field]).trim();
   }
