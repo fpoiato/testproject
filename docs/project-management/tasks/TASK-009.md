@@ -1,5 +1,7 @@
 # TASK-009 - Criar DynamoDB
 
+> ⚠️ **DEPRECATED — documento histórico.** Descreve o modelo antigo (CDK híbrido + `*.tfvars` por ambiente), substituído pela consolidação em Terraform (stack único multi-ambiente). Mantido apenas como registro. Fonte da verdade atual: [`infra/terraform/README.md`](../../../infra/terraform/README.md) e [ADR-003](../../architecture/adr-003-terraform-shared-model.md).
+
 **Status:** 🔄 In Progress
 
 ## Objetivo
