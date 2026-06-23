@@ -1,7 +1,9 @@
 # ADR-002: Terraform + CDK Hybrid Architecture
 
+> ⚠️ **DEPRECATED — documento histórico.** Este ADR descreve o modelo híbrido CDK + Terraform, que foi abandonado. Mantido apenas como registro. Fonte da verdade atual: [ADR-003](adr-003-terraform-shared-model.md) e [`infra/terraform/README.md`](../../infra/terraform/README.md).
+
 ## Status
-**Aceito** (2026-06-22)
+**Superseded by [ADR-003](adr-003-terraform-shared-model.md)** (originalmente Aceito em 2026-06-22)
 
 ## Contexto
 O projeto `testproject` requer um arquitetura que:
