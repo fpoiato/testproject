@@ -1,67 +1,24 @@
 version: 0.2
 
+# Deploy do backend: empacota src/, publica nova versao de cada Lambda e move o
+# alias do ambiente (LAMBDA_ALIAS) para a nova versao. Sem CDK.
 phases:
-  install:
-    runtime-versions:
-      nodejs: 20
-    commands:
-      - echo "Installing Node.js 20 runtime..."
-
-  pre_build:
-    commands:
-      - echo "Setting up environment variables..."
-      - export CDK_DEFAULT_REGION=$AWS_REGION
-      - export CDK_DEFAULT_ACCOUNT=$CDK_DEFAULT_ACCOUNT
-      - export CDK_DEPLOY_REGION=$CDK_DEPLOY_REGION
-      - echo "Environment: $ENVIRONMENT"
-      - echo "AWS Region: $AWS_REGION"
-      - echo "AWS Account: $CDK_DEFAULT_ACCOUNT"
-
   build:
     commands:
-      - echo "Build started at $(date)"
-      - echo "========================================="
-      - echo "Running CDK Build and Deploy for Backend"
-      - echo "========================================="
-
-      # Navigate to CDK directory
-      - cd cdk/sam-app-cdk
-
-      # Install dependencies
-      - echo "Installing CDK dependencies..."
-      - npm ci
-
-      # Build TypeScript
-      - echo "Building TypeScript..."
-      - npm run build
-
-      # Bootstrap CDK (if not already bootstrapped)
+      - echo "Ambiente=$ENVIRONMENT alias=$LAMBDA_ALIAS"
+      - cd backend
+      - rm -f function.zip
+      - (cd src && zip -qr ../function.zip . -x "*.test.js")
       - |
-        if ! npx cdk bootstrap 2>/dev/null; then
-          echo "Bootstrapping CDK for the first time..."
-          npx cdk bootstrap
-        fi
-
-      # Deploy CDK stack
-      - echo "Deploying CDK stack..."
-      - npx cdk deploy --require-approval never --ci --verbose
-
-      - echo "Build completed at $(date)"
-
+        set -e
+        for FN in $FUNCTIONS; do
+          NAME="testproject-$FN"
+          echo "==> $NAME"
+          VERSION=$(aws lambda update-function-code --function-name "$NAME" --zip-file fileb://function.zip --publish --query Version --output text)
+          aws lambda wait function-updated --function-name "$NAME"
+          aws lambda update-alias --function-name "$NAME" --name "$LAMBDA_ALIAS" --function-version "$VERSION"
+          echo "    versao $VERSION -> alias $LAMBDA_ALIAS"
+        done
   post_build:
     commands:
-      - echo "Post-build phase completed"
-      - echo "========================================="
-      - echo "Backend Deployment Summary"
-      - echo "========================================="
-      - echo "Environment: $ENVIRONMENT"
-      - echo "Region: $AWS_REGION"
-      - echo "Deployment Status: SUCCESS"
-
-artifacts:
-  files: []
-  discard-paths: yes
-
-cache:
-  paths:
-    - cd cdk/sam-app-cdk/node_modules/**/*
+      - echo "Backend deploy concluido para $ENVIRONMENT"

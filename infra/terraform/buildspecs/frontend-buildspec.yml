@@ -1,81 +1,19 @@
 version: 0.2
 
+# Build do Angular com config do ambiente (gerada a partir das env vars do
+# CodeBuild) e deploy para o bucket S3 + invalidacao do CloudFront.
 phases:
   install:
     runtime-versions:
       nodejs: 20
-    commands:
-      - echo "Installing Node.js 20 runtime..."
-      - npm install -g npm@latest
-
-  pre_build:
-    commands:
-      - echo "Setting up environment variables..."
-      - echo "Environment: $ENVIRONMENT"
-      - echo "AWS Region: $AWS_REGION"
-
   build:
     commands:
-      - echo "Build started at $(date)"
-      - echo "========================================="
-      - echo "Building Frontend Application"
-      - echo "========================================="
-
-      # Check if frontend directory exists
-      - |
-        if [ ! -d "frontend" ]; then
-          echo "⚠️ Frontend directory not found - skipping build"
-          echo "Frontend will be implemented in future tasks"
-          exit 0
-        fi
-
-      # Navigate to frontend directory
       - cd frontend
-
-      # Install dependencies
-      - echo "Installing frontend dependencies..."
       - npm ci
-
-      # Run tests (if available)
-      - |
-        if grep -q '"test"' package.json; then
-          echo "Running frontend tests..."
-          npm test
-        else
-          echo "No tests found - skipping"
-        fi
-
-      # Build production bundle
-      - echo "Building production bundle..."
+      - echo "Gerando config e buildando para $ENVIRONMENT (API_URL=$API_URL)"
       - npm run build
-
-      # Sync to S3 (if frontend build exists)
-      - |
-        if [ -d "dist" ] || [ -d "build" ]; then
-          echo "Syncing build to S3..."
-          BUILD_DIR=$(ls -d dist build 2>/dev/null | head -1)
-          aws s3 sync $BUILD_DIR s3://testproject-frontend-${ENVIRONMENT}/ --delete
-          echo "✅ Frontend deployed to S3"
-        else
-          echo "⚠️ No build output found (dist or build directory)"
-        fi
-
-      - echo "Build completed at $(date)"
-
+      - aws s3 sync dist/frontend/browser "s3://$FRONTEND_BUCKET/" --delete
+      - aws cloudfront create-invalidation --distribution-id "$CF_DISTRIBUTION_ID" --paths "/*"
   post_build:
     commands:
-      - echo "Post-build phase completed"
-      - echo "========================================="
-      - echo "Frontend Deployment Summary"
-      - echo "========================================="
-      - echo "Environment: $ENVIRONMENT"
-      - echo "Region: $AWS_REGION"
-      - echo "Deployment Status: SUCCESS"
-
-artifacts:
-  files: []
-  discard-paths: yes
-
-cache:
-  paths:
-    - cd frontend/node_modules/**/*
+      - echo "Frontend deploy concluido para $ENVIRONMENT (bucket $FRONTEND_BUCKET)"
