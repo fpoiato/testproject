@@ -8,6 +8,7 @@ Issue: [#47](https://github.com/fpoiato/testproject/issues/47)
 - [x] [TASK-030](./TASK-030.md) - Tabela com filtro/busca/sorting
 - [x] [TASK-031](./TASK-031.md) - Formulario CRUD
 - [x] [TASK-032](./TASK-032.md) - Export Excel
+- [ ] [TASK-041](./TASK-041.md) - Forgot Password (recuperacao de senha via email)
 
 ## Stack
 Angular 19 (standalone), aws-amplify v6 (Cognito), xlsx (export). Config por
