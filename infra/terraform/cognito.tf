@@ -1,3 +1,10 @@
+# Ambientes que enviam e-mail via SES (DEVELOPER) com dominio proprio + DKIM,
+# em vez do COGNITO_DEFAULT (que estava caindo/sumindo na entrega ao Gmail).
+# staging/production seguem em COGNITO_DEFAULT por ora (menor blast radius).
+locals {
+  cognito_ses_envs = toset(["development", "test"])
+}
+
 # Um Cognito User Pool por ambiente. Self sign-up por email + TOTP MFA.
 resource "aws_cognito_user_pool" "main" {
   for_each = local.environments
@@ -12,9 +19,12 @@ resource "aws_cognito_user_pool" "main" {
   username_attributes      = ["email"]
   auto_verified_attributes = ["email"]
 
-  # Email pelo Cognito (COGNITO_DEFAULT) - evita dependencia de SES sandbox.
+  # dev/test: SES (DEVELOPER) com remetente no dominio testproject.fpoiato.com.
+  # demais: COGNITO_DEFAULT.
   email_configuration {
-    email_sending_account = "COGNITO_DEFAULT"
+    email_sending_account = contains(local.cognito_ses_envs, each.key) ? "DEVELOPER" : "COGNITO_DEFAULT"
+    from_email_address    = contains(local.cognito_ses_envs, each.key) ? local.ses_from_address : null
+    source_arn            = contains(local.cognito_ses_envs, each.key) ? aws_sesv2_email_identity.sender.arn : null
   }
 
   password_policy {
