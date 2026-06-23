@@ -1,0 +1,7 @@
+{
+  "environment": "development",
+  "apiUrl": "",
+  "region": "us-east-1",
+  "userPoolId": "",
+  "userPoolClientId": ""
+}

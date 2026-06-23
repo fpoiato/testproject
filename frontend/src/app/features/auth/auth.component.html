@@ -1,0 +1,86 @@
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1 class="auth-title">🚗 TestProject</h1>
+    <p class="auth-sub">Ambiente: <strong>{{ environment }}</strong></p>
+
+    @if (errorMsg()) { <div class="alert alert-error">{{ errorMsg() }}</div> }
+    @if (infoMsg()) { <div class="alert alert-info">{{ infoMsg() }}</div> }
+
+    @switch (mode()) {
+      @case ('login') {
+        <h2>Entrar</h2>
+        <form (ngSubmit)="doLogin()">
+          <label>Email
+            <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
+          </label>
+          <label>Senha
+            <input type="password" name="password" [(ngModel)]="password" required autocomplete="current-password" />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">
+            {{ loading() ? 'Entrando…' : 'Entrar' }}
+          </button>
+        </form>
+        <p class="switch">Não tem conta?
+          <a (click)="setMode('register')">Cadastre-se</a>
+        </p>
+      }
+
+      @case ('register') {
+        <h2>Criar conta</h2>
+        <form (ngSubmit)="doRegister()">
+          <label>Email
+            <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
+          </label>
+          <label>Senha
+            <input type="password" name="password" [(ngModel)]="password" required autocomplete="new-password" />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">
+            {{ loading() ? 'Enviando…' : 'Cadastrar' }}
+          </button>
+        </form>
+        <p class="switch">Já tem conta?
+          <a (click)="setMode('login')">Entrar</a>
+        </p>
+      }
+
+      @case ('confirm') {
+        <h2>Confirme seu email</h2>
+        <form (ngSubmit)="doConfirm()">
+          <label>Código de verificação
+            <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">Confirmar</button>
+        </form>
+        <p class="switch"><a (click)="resend()">Reenviar código</a></p>
+      }
+
+      @case ('totp-setup') {
+        <h2>Configurar MFA</h2>
+        <p class="hint">Escaneie o QR code com seu app autenticador (Google Authenticator, Authy, etc.) e informe o código gerado.</p>
+        @if (totpUri()) {
+          <div class="qr"><img [src]="qrUrl()" alt="QR Code MFA" width="200" height="200" /></div>
+        }
+        @if (totpSecret()) {
+          <p class="secret">Chave manual: <code>{{ totpSecret() }}</code></p>
+        }
+        <form (ngSubmit)="confirmTotp()">
+          <label>Código do app autenticador
+            <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">Ativar e entrar</button>
+        </form>
+      }
+
+      @case ('totp-confirm') {
+        <h2>Verificação MFA</h2>
+        <p class="hint">Informe o código atual do seu app autenticador.</p>
+        <form (ngSubmit)="confirmTotp()">
+          <label>Código
+            <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" autofocus />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">Verificar</button>
+        </form>
+      }
+    }
+  </div>
+</div>

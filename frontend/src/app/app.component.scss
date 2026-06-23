@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 64px;
+  background: #0f172a;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .logo {
+      font-size: 1.5rem;
+    }
+    .title {
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+  }
+
+  .env-badge {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: #334155;
+    letter-spacing: 0.5px;
+
+    &.env-development { background: #2563eb; }
+    &.env-test { background: #d97706; }
+    &.env-staging { background: #7c3aed; }
+    &.env-production { background: #16a34a; }
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .email { font-size: 0.85rem; opacity: 0.85; }
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  &:hover { background: rgba(255, 255, 255, 0.12); }
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
