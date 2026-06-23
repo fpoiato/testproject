@@ -2,7 +2,7 @@
 # em vez do COGNITO_DEFAULT (que estava caindo/sumindo na entrega ao Gmail).
 # staging/production seguem em COGNITO_DEFAULT por ora (menor blast radius).
 locals {
-  cognito_ses_envs = toset(["development", "test"])
+  cognito_ses_envs = toset(["development", "staging", "test", "production-blue", "production-green"])
 }
 
 # Um Cognito User Pool por ambiente. Self sign-up por email + TOTP MFA.
