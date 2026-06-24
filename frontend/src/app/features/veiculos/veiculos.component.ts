@@ -3,17 +3,20 @@ import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import { VeiculoService } from '../../core/veiculo.service';
 import { Veiculo } from '../../core/veiculo.model';
+import { I18nService } from '../../core/i18n.service';
+import { TranslatePipe } from '../../core/translate.pipe';
 
 type SortKey = keyof Pick<Veiculo, 'placa' | 'marca' | 'modelo' | 'versao' | 'cor' | 'ano'>;
 
 @Component({
   selector: 'app-veiculos',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './veiculos.component.html',
   styleUrl: './veiculos.component.scss',
 })
 export class VeiculosComponent implements OnInit {
   private service = inject(VeiculoService);
+  private i18n = inject(I18nService);
 
   veiculos = signal<Veiculo[]>([]);
   loading = signal(false);
@@ -24,7 +27,6 @@ export class VeiculosComponent implements OnInit {
   sortKey = signal<SortKey>('marca');
   sortAsc = signal(true);
 
-  // Formulario / modal
   showForm = signal(false);
   editing = signal<Veiculo | null>(null);
   form: Veiculo = this.emptyForm();
@@ -73,7 +75,7 @@ export class VeiculosComponent implements OnInit {
         this.loading.set(false);
       },
       error: (e) => {
-        this.errorMsg.set(e?.error?.error || e?.message || 'Erro ao carregar veículos');
+        this.errorMsg.set(e?.error?.error || e?.message || this.i18n.t('error.loadVehicles'));
         this.loading.set(false);
       },
     });
@@ -142,7 +144,7 @@ export class VeiculosComponent implements OnInit {
         this.errorMsg.set(
           (Array.isArray(details) ? details.join('; ') : null) ||
             e?.error?.error ||
-            'Erro ao salvar'
+            this.i18n.t('error.save'),
         );
       },
     });
@@ -150,25 +152,25 @@ export class VeiculosComponent implements OnInit {
 
   remove(v: Veiculo) {
     if (!v.id) return;
-    if (!confirm(`Excluir ${v.marca} ${v.modelo}?`)) return;
+    if (!confirm(this.i18n.t('veiculos.confirmDelete', { brand: v.marca, model: v.modelo }))) return;
     this.service.remove(v.id).subscribe({
       next: () => this.load(),
-      error: (e) => this.errorMsg.set(e?.error?.error || 'Erro ao excluir'),
+      error: (e) => this.errorMsg.set(e?.error?.error || this.i18n.t('error.delete')),
     });
   }
 
   exportExcel() {
     const rows = this.filtered().map((v) => ({
-      Placa: v.placa,
-      Marca: v.marca,
-      Modelo: v.modelo,
-      Versão: v.versao ?? '',
-      Cor: v.cor,
-      Ano: v.ano,
+      [this.i18n.t('veiculos.col.plate')]: v.placa,
+      [this.i18n.t('veiculos.col.brand')]: v.marca,
+      [this.i18n.t('veiculos.col.model')]: v.modelo,
+      [this.i18n.t('veiculos.col.version')]: v.versao ?? '',
+      [this.i18n.t('veiculos.col.color')]: v.cor,
+      [this.i18n.t('veiculos.col.year')]: v.ano,
     }));
     const ws = XLSX.utils.json_to_sheet(rows);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Veiculos');
+    XLSX.utils.book_append_sheet(wb, ws, this.i18n.t('veiculos.sheetName'));
     XLSX.writeFile(wb, `veiculos-${new Date().toISOString().slice(0, 10)}.xlsx`);
   }
 }

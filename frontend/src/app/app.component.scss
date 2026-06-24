@@ -51,6 +51,12 @@
     gap: 1rem;
     .email { font-size: 0.85rem; opacity: 0.85; }
   }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .btn-ghost {
