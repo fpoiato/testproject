@@ -1,5 +1,7 @@
 # TASK-007 - Criar buckets frontend
 
+> ⚠️ **DEPRECATED — documento histórico.** Descreve o modelo antigo (CDK híbrido + `*.tfvars` por ambiente), substituído pela consolidação em Terraform (stack único multi-ambiente). Mantido apenas como registro. Fonte da verdade atual: [`infra/terraform/README.md`](../../../infra/terraform/README.md) e [ADR-003](../../architecture/adr-003-terraform-shared-model.md).
+
 ## Objetivo
 Declarar os S3 Buckets no IaC para a hospedagem do SPA Angular, provendo um bucket isolado por ambiente.
 

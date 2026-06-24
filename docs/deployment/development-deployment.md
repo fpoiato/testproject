@@ -8,54 +8,76 @@ The deployment to `development` is automatically triggered by:
 - Git push to the `development` branch
 - Merge of PR to `development` branch
 
+The source action uses GitHub v1 (OAuth) polling, so it may take up to ~1 minute
+after the push for the pipeline to start. You can also start it manually:
+
+```bash
+aws codepipeline start-pipeline-execution --name testproject-development
+```
+
 ## Pipeline Flow
 
 ```
 GitHub (development branch)
-   ↓ (push/merge)
-CodePipeline Backend (testproject-backend-development)
-   ↓
-CodeBuild Backend (testproject-backend-development)
-   ↓
-CDK Deploy Lambda + API Gateway
-   ↓
-Development Environment Updated
+   |  (push/merge, polled)
+CodePipeline (testproject-development)
+   |-- Source            -> artifact "src"
+   `-- Build-Deploy (parallel)
+        |-- Backend  (CodeBuild: testproject-backend-development)
+        |     publishes a new Lambda version and shifts the
+        |     "development" alias to it
+        `-- Frontend (CodeBuild: testproject-frontend-development)
+              builds the Angular app with the env config,
+              s3 sync to the bucket, CloudFront invalidation
 ```
+
+> There is **no CDK** in the deploy. The backend buildspec
+> (`infra/terraform/buildspecs/backend-buildspec.yml`) updates the Lambda code,
+> publishes a version and moves the alias. The frontend buildspec
+> (`infra/terraform/buildspecs/frontend-buildspec.yml`) builds and ships the SPA.
+> Infrastructure itself is provisioned separately via `terraform apply`.
 
 ## Deployment Configuration
 
-**CodePipeline Branch Trigger:**
-- Backend pipeline: Triggers on `development` branch
-- Frontend pipeline: Triggers on `development` branch
-- On push/merge event
+**CodePipeline:** `testproject-development` (one pipeline per environment,
+source = `development` branch).
 
 **CodeBuild Projects:**
-- Backend project: `testproject-backend-development`
-- Frontend project: `testproject-frontend-development`
-- Both use ARM architecture for cost efficiency
-- 7-day log retention
+- Backend: `testproject-backend-development`
+- Frontend: `testproject-frontend-development`
+- Image: `aws/codebuild/amazonlinux2-x86_64-standard:5.0`, `BUILD_GENERAL1_SMALL`
 
-**Environment Variables:**
-- `ENVIRONMENT: development`
-- `AWS_REGION: us-east-1`
-- Pipeline alert email configured in `dev.tfvars`
+**Key environment variables (injected by Terraform, see `infra/terraform/cicd.tf`):**
+- Backend: `ENVIRONMENT`, `LAMBDA_ALIAS=development`, `FUNCTIONS`, `AWS_DEFAULT_REGION`
+- Frontend: `ENVIRONMENT`, `API_URL`, `COGNITO_USER_POOL_ID`, `COGNITO_CLIENT_ID`,
+  `AWS_REGION`, `FRONTEND_BUCKET`, `CF_DISTRIBUTION_ID`
+
+The pipeline alert email is the `pipeline_alert_email` Terraform variable
+(default `nandopoiato@gmail.com`), not a `*.tfvars` file.
 
 ## Deployment Status
 
 Check deployment status:
-1. CodePipeline console: `testproject-backend-development`
-2. CodeBuild console: Build logs
+1. CodePipeline console: `testproject-development`
+2. CodeBuild console: build logs of `testproject-backend-development` / `testproject-frontend-development`
 3. CloudWatch Logs: `/aws/codebuild/testproject-backend-development`
+
+## Promoting to other environments
+
+`development` is the first stage. Promote by merging into the next branch
+(`test` -> `staging` -> `production`); each merge triggers the matching
+`testproject-<env>` pipeline. The `production` pipeline has a **Manual Approval**
+stage before Build-Deploy.
 
 ## Rollback
 
 To rollback a deployment:
-1. Push a fixed commit to `development`
-2. Pipeline automatically triggers
-3. Manual rollback via CodeBuild: Select previous build
+1. Push a fixed commit to `development` (pipeline re-runs), or
+2. Re-point the Lambda `development` alias to a previous version, or
+3. Re-run a previous successful pipeline execution from the console.
 
 ## Monitoring
 
-- CloudWatch Alarms: Failures trigger email alerts
-- Pipeline failures: SNS topic notifications
-- Build logs: Available in CodeBuild console for 7 days
+- CloudWatch Alarm `testproject-pipeline-failure-development` on failed executions
+- SNS topic `testproject-pipeline-alerts` (email subscription) for notifications
+- Build logs available in the CodeBuild console
