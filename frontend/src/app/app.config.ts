@@ -8,6 +8,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { ConfigService } from './core/app-config';
+import { I18nService } from './core/i18n.service';
 import { initAppFactory } from './core/app-init';
 import { authInterceptor } from './core/auth.interceptor';
 
@@ -19,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initAppFactory,
-      deps: [ConfigService],
+      deps: [ConfigService, I18nService],
       multi: true,
     },
   ],
