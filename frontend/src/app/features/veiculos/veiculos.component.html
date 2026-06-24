@@ -3,7 +3,7 @@
     <input
       class="search"
       type="search"
-      placeholder="Buscar (marca, modelo, versão, cor, ano)…"
+      placeholder="Buscar (placa, marca, modelo, versão, cor, ano)…"
       [ngModel]="search()"
       (ngModelChange)="search.set($event)"
     />
@@ -33,6 +33,7 @@
     <table>
       <thead>
         <tr>
+          <th (click)="toggleSort('placa')">Placa {{ sortIndicator('placa') }}</th>
           <th (click)="toggleSort('marca')">Marca {{ sortIndicator('marca') }}</th>
           <th (click)="toggleSort('modelo')">Modelo {{ sortIndicator('modelo') }}</th>
           <th (click)="toggleSort('versao')">Versão {{ sortIndicator('versao') }}</th>
@@ -44,6 +45,7 @@
       <tbody>
         @for (v of filtered(); track v.id) {
           <tr>
+            <td>{{ v.placa }}</td>
             <td>{{ v.marca }}</td>
             <td>{{ v.modelo }}</td>
             <td>{{ v.versao }}</td>
@@ -55,7 +57,7 @@
             </td>
           </tr>
         } @empty {
-          <tr><td colspan="6" class="muted center">Nenhum veículo encontrado.</td></tr>
+          <tr><td colspan="7" class="muted center">Nenhum veículo encontrado.</td></tr>
         }
       </tbody>
     </table>
@@ -69,6 +71,9 @@
       <h2>{{ editing() ? 'Editar' : 'Novo' }} veículo</h2>
       @if (errorMsg()) { <div class="alert alert-error">{{ errorMsg() }}</div> }
       <form (ngSubmit)="save()">
+        <label>Placa
+          <input name="placa" [(ngModel)]="form.placa" required />
+        </label>
         <label>Marca
           <input name="marca" [(ngModel)]="form.marca" required />
         </label>

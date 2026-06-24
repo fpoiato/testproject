@@ -1,81 +1,117 @@
-# Terraform Infrastructure - Frontend Buckets
+# Infraestrutura Terraform (stack unico multi-ambiente)
 
-This folder contains Terraform configuration provisioning S3 buckets for frontend SPA Angular hosting.
+Este diretorio contem **toda** a infraestrutura do projeto em um unico stack Terraform.
+Um unico `terraform apply` provisiona os quatro ambientes ao mesmo tempo
+(`development`, `test`, `staging`, `production`) usando `for_each` sobre
+`local.environments` (ver `main.tf`).
 
-## Environments
+> Nao existe mais um `*.tfvars` por ambiente. O modelo antigo (um apply por
+> ambiente com `-var-file`) foi substituido por este stack compartilhado.
 
-The same Terraform configuration is used for multiple environments via variable files:
+## Ambientes
 
-- **development** → `dev.tfvars`
-- **test** → `test.tfvars`
-- **staging** → `staging.tfvars`
-- **production-blue** → `production-blue.tfvars`
-- **production-green** → `production-green.tfvars`
+| Ambiente     | Subdominio | URL                                  | MFA      | Lambda alias                         |
+|--------------|------------|--------------------------------------|----------|--------------------------------------|
+| development  | `dev`      | https://dev.testproject.fpoiato.com  | OPTIONAL | `development`                        |
+| test         | `test`     | https://test.testproject.fpoiato.com | ON       | `test`                               |
+| staging      | `staging`  | https://staging.testproject.fpoiato.com | ON    | `staging`                            |
+| production   | `app`      | https://app.testproject.fpoiato.com  | ON       | `production-blue` / `production-green` |
 
-## Usage
+A producao usa **blue/green**: o subdominio `app` aponta para a cor ativa,
+controlada pela variavel `production_live_color` (`blue` por padrao). Existem
+ainda os subdominios `app-blue` e `app-green` para validar cada cor antes do switch.
 
-### Initialize
+## O que o stack provisiona
+
+- **API Gateway** unico (`apigateway.tf`) com um stage por ambiente. Cada stage
+  define a stage variable `lambdaAlias`, que roteia para o alias correto da Lambda.
+- **Lambdas de aplicacao** (`lambda.tf`) versionadas, com aliases por slot
+  (`development`, `test`, `staging`, `production-blue`, `production-green`).
+- **Lambda Authorizer** (`authorizer.tf`) que mapeia o stage do request para o
+  Cognito User Pool correto.
+- **DynamoDB** (`dynamodb.tf`): uma tabela `Veiculos-<ambiente>` por ambiente.
+- **Cognito** (`cognito.tf`): um User Pool por ambiente, com self sign-up por
+  email e TOTP MFA.
+- **SES** (`ses.tf`): identidade de dominio (`testproject.fpoiato.com`) com Easy
+  DKIM + custom MAIL FROM, usada como remetente dos e-mails do Cognito.
+- **Frontend** (`frontend.tf`): S3 + CloudFront + certificado ACM + registros
+  Route53 por ambiente, incluindo blue/green em producao.
+- **CI/CD** (`cicd.tf`): CodePipeline + CodeBuild por ambiente, com aprovacao
+  manual na producao.
+
+## Estado remoto
+
+O state fica em S3 com lock em DynamoDB (`backend.tf`):
+
+- Bucket: `testproject-tfstate-986873053420`
+- Key: `infra/terraform.tfstate`
+- Lock: tabela DynamoDB `testproject-tflock`
+
+## Variaveis
+
+Todas as variaveis (`variables.tf`) tem `default`, exceto `github_oauth_token`.
+
+| Variavel                       | Default       | Descricao                                            |
+|--------------------------------|---------------|------------------------------------------------------|
+| `aws_region`                   | `us-east-1`   | Regiao AWS (CloudFront exige ACM em us-east-1).       |
+| `production_live_color`        | `blue`        | Cor ativa do blue/green de producao.                 |
+| `github_owner`                 | `fpoiato`     | Owner do repositorio.                                 |
+| `github_repo`                  | `testproject` | Nome do repositorio.                                  |
+| `github_oauth_token`           | (obrigatorio) | Token/PAT do GitHub para a source action do pipeline. |
+| `pipeline_alert_email`         | `nandopoiato@gmail.com` | Email de alerta de falha de pipeline.      |
+| `codebuild_log_retention_days` | `7`           | Retencao (dias) dos logs de CodeBuild.               |
+
+O `github_oauth_token` e fornecido via **`github.auto.tfvars`**, carregado
+automaticamente (sufixo `.auto.tfvars`) e ignorado pelo git (`*.auto.tfvars`
+no `.gitignore`). Crie-o localmente:
+
+```hcl
+# infra/terraform/github.auto.tfvars
+github_oauth_token = "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+## Uso
+
+Defina o profile AWS antes dos comandos:
 
 ```bash
+export AWS_PROFILE=nandopoiato
 cd infra/terraform
+```
+
+### Inicializar
+
+```bash
 terraform init
 ```
 
-### Plan
+### Plan / Apply (todos os ambientes de uma vez)
 
 ```bash
-# Development
-terraform plan -var-file="dev.tfvars"
-
-# Test
-terraform plan -var-file="test.tfvars"
-
-# Staging
-terraform plan -var-file="staging.tfvars"
-
-# Production Blue
-terraform plan -var-file="production-blue.tfvars"
-
-# Production Green
-terraform plan -var-file="production-green.tfvars"
+terraform plan
+terraform apply
 ```
 
-### Apply
+### Switch blue/green de producao
+
+Promova a cor green (faz o subdominio `app` apontar para o slot green):
 
 ```bash
-terraform apply -var-file="dev.tfvars"
+terraform apply -var="production_live_color=green"
 ```
 
-### Destroy
+## Outputs
 
-```bash
-terraform destroy -var-file="dev.tfvars"
-```
+`outputs.tf` expoe, entre outros: `api_id`, `api_invoke_urls`, `frontend_urls`,
+`cognito_user_pool_ids`, `cognito_client_ids`, `cloudfront_distribution_ids`,
+`frontend_buckets`, `production_live_color` e a identidade SES do remetente.
 
-## Resources
+## Deploy de aplicacao x infraestrutura
 
-- **S3 Bucket:** One per environment for frontend static assets
-- **CloudFront Distribution:** CDN in front of S3 buckets
-- **S3 Origin Access Control (OAC):** Private bucket access for CloudFront
-- **Security:**
-  - Enforce SSL/TLS (HTTPS only)
-  - Block all public access
-  - Server-side encryption (AES256)
-  - Versioning disabled (cost optimization for SPA)
-  - CloudFront OAC ensures bucket remains private
+- **Infraestrutura** (este diretorio): aplicada manualmente com `terraform apply`.
+- **Aplicacao** (frontend Angular + Lambdas): deployada pelos pipelines de CI/CD
+  ao fazer push/merge nas branches `development`, `test`, `staging`, `production`.
+  Os pipelines **nao** executam Terraform.
 
-## Domains
-
-Custom domains are configured per environment: | Environment | Domain | |------------|--------| | development | `dev.testproject.fpoiato.com` | | test | `test.testproject.fpoiato.com` | | staging | `staging.testproject.fpoiato.com` | | production-blue | `blue.testproject.fpoiato.com` | | production-green | `green.testproject.fpoiato.com` |
-
-See [ADR-001](../../docs/architecture/adr-001-dns-domains.md) for full DNS strategy.
-
-## State Management
-
-**Important:** This project uses a single shared AWS account. Contrary to the setup indicated in the main repository docs, Terraform state is not currently backed by S3 + DynamoDB; consider adding remote state before moving to production if you plan to adopt a multi-account setup later.
-
-## Project Context
-
-Part of **TASK-007** and **TASK-008** in the `testproject` repository.
-
-
+Veja os ADRs em `../../docs/architecture/` para o detalhamento das decisoes
+(incluindo `adr-003-terraform-shared-model.md`).

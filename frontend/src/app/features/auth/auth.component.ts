@@ -4,7 +4,15 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { ConfigService } from '../../core/app-config';
 
-type Mode = 'login' | 'register' | 'confirm' | 'totp-setup' | 'totp-confirm';
+type Mode =
+  | 'login'
+  | 'register'
+  | 'confirm'
+  | 'totp-setup'
+  | 'totp-confirm'
+  | 'forgot-request'
+  | 'forgot-confirm'
+  | 'forgot-success';
 
 @Component({
   selector: 'app-auth',
@@ -24,6 +32,8 @@ export class AuthComponent {
 
   email = '';
   password = '';
+  newPassword = '';
+  confirmPassword = '';
   code = '';
 
   totpUri = signal<string | null>(null);
@@ -44,8 +54,8 @@ export class AuthComponent {
     this.infoMsg.set(null);
   }
 
-  private fail(e: any) {
-    this.errorMsg.set(e?.message || 'Ocorreu um erro. Tente novamente.');
+  private fail(e: unknown, fallback = 'Ocorreu um erro. Tente novamente.') {
+    this.errorMsg.set(this.auth.mapAuthError(e) || fallback);
   }
 
   async doLogin() {
@@ -97,6 +107,75 @@ export class AuthComponent {
     } catch (e) {
       this.fail(e);
     }
+  }
+
+  async requestPasswordReset() {
+    this.loading.set(true);
+    this.errorMsg.set(null);
+    this.infoMsg.set(null);
+    try {
+      await this.auth.requestPasswordReset(this.email);
+      this.infoMsg.set(
+        'Se o email estiver cadastrado, enviaremos um código de verificação em instantes.',
+      );
+      this.code = '';
+      this.newPassword = '';
+      this.confirmPassword = '';
+      this.setMode('forgot-confirm');
+    } catch (e) {
+      this.fail(e);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
+  async resendPasswordReset() {
+    this.loading.set(true);
+    this.errorMsg.set(null);
+    try {
+      await this.auth.requestPasswordReset(this.email);
+      this.infoMsg.set('Novo código enviado, se o email estiver cadastrado.');
+    } catch (e) {
+      this.fail(e);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
+  async confirmPasswordReset() {
+    const validationError = this.auth.validatePassword(this.newPassword, this.environment);
+    if (validationError) {
+      this.errorMsg.set(validationError);
+      return;
+    }
+    if (this.newPassword !== this.confirmPassword) {
+      this.errorMsg.set('As senhas informadas não coincidem.');
+      return;
+    }
+
+    this.loading.set(true);
+    this.errorMsg.set(null);
+    try {
+      await this.auth.confirmPasswordReset(this.email, this.code, this.newPassword);
+      this.password = '';
+      this.code = '';
+      this.newPassword = '';
+      this.confirmPassword = '';
+      this.infoMsg.set(null);
+      this.setMode('forgot-success');
+    } catch (e) {
+      this.fail(e);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
+  backToLogin() {
+    this.password = '';
+    this.code = '';
+    this.newPassword = '';
+    this.confirmPassword = '';
+    this.setMode('login');
   }
 
   async confirmTotp() {

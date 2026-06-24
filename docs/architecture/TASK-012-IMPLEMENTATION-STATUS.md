@@ -1,5 +1,7 @@
 # TASK-012 Implementation Status
 
+> ⚠️ **DEPRECATED — documento histórico.** Descreve a implementação via CDK (modelo híbrido), substituída pela consolidação em Terraform (stack único multi-ambiente). Mantido apenas como registro. Fonte da verdade atual: [`infra/terraform/README.md`](../../infra/terraform/README.md) e [ADR-003](adr-003-terraform-shared-model.md).
+
 **Status:** 🔄 **PENDING DEPLOYMENT** (已完成代码, 待部署后真正改善)
 
 ## Branch

@@ -38,3 +38,16 @@ output "frontend_buckets" {
 output "production_live_color" {
   value = var.production_live_color
 }
+
+output "ses_sender_identity" {
+  description = "Identidade de dominio SES usada como remetente do Cognito (dev/test)"
+  value       = aws_sesv2_email_identity.sender.email_identity
+}
+
+output "ses_sender_arn" {
+  value = aws_sesv2_email_identity.sender.arn
+}
+
+output "ses_from_address" {
+  value = local.ses_from_address
+}
