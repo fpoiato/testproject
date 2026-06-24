@@ -25,6 +25,18 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "artifacts" {
   }
 }
 
+# ----------------------------- GitHub (CodeConnections) --------------------
+# Substitui a integracao legada GitHub v1 (OAuthToken + polling).
+# Apos o apply, conclua a autorizacao no console AWS (connection PENDING -> AVAILABLE).
+resource "aws_codestarconnections_connection" "github" {
+  name          = "testproject-github"
+  provider_type = "GitHub"
+
+  tags = {
+    Project = local.project
+  }
+}
+
 # ----------------------------- IAM ----------------------------------------
 resource "aws_iam_role" "codebuild" {
   name = "testproject-codebuild-role"
@@ -115,6 +127,11 @@ resource "aws_iam_role_policy" "codepipeline" {
         Effect   = "Allow"
         Action   = ["sns:Publish"]
         Resource = aws_sns_topic.pipeline_alerts.arn
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["codestar-connections:UseConnection"]
+        Resource = aws_codestarconnections_connection.github.arn
       },
     ]
   })
@@ -223,16 +240,15 @@ resource "aws_codepipeline" "env" {
     action {
       name             = "Source"
       category         = "Source"
-      owner            = "ThirdParty"
-      provider         = "GitHub"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
       version          = "1"
       output_artifacts = ["src"]
       configuration = {
-        Owner                = var.github_owner
-        Repo                 = var.github_repo
-        Branch               = each.key
-        OAuthToken           = var.github_oauth_token
-        PollForSourceChanges = "true"
+        ConnectionArn    = aws_codestarconnections_connection.github.arn
+        FullRepositoryId = "${var.github_owner}/${var.github_repo}"
+        BranchName       = each.key
+        DetectChanges    = "true"
       }
     }
   }

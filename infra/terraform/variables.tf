@@ -26,12 +26,6 @@ variable "github_repo" {
   default     = "testproject"
 }
 
-variable "github_oauth_token" {
-  description = "Token OAuth/PAT do GitHub para a source action (GitHub v1) do CodePipeline"
-  type        = string
-  sensitive   = true
-}
-
 variable "pipeline_alert_email" {
   description = "Email para alertas de falha de pipeline"
   type        = string

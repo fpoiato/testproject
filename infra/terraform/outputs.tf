@@ -51,3 +51,18 @@ output "ses_sender_arn" {
 output "ses_from_address" {
   value = local.ses_from_address
 }
+
+output "github_connection_arn" {
+  description = "ARN da conexao AWS CodeConnections com o GitHub (autorize no console se PENDING)"
+  value       = aws_codestarconnections_connection.github.arn
+}
+
+output "github_connection_status" {
+  description = "Status da conexao GitHub (AVAILABLE apos autorizacao no console AWS)"
+  value       = aws_codestarconnections_connection.github.connection_status
+}
+
+output "codepipeline_names" {
+  description = "Nomes dos pipelines por ambiente"
+  value       = { for env, p in aws_codepipeline.env : env => p.name }
+}
