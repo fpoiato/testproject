@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import {
   signUp,
   confirmSignUp,
@@ -11,6 +11,7 @@ import {
   resetPassword,
   confirmResetPassword,
 } from 'aws-amplify/auth';
+import { I18nService } from './i18n.service';
 
 export interface SignInResult {
   isSignedIn: boolean;
@@ -27,6 +28,7 @@ export interface SignInResult {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private i18n = inject(I18nService);
   readonly userEmail = signal<string | null>(null);
 
   async register(email: string, password: string): Promise<void> {
@@ -60,19 +62,19 @@ export class AuthService {
   validatePassword(password: string, environment: string): string | null {
     const minLength = environment === 'development' ? 8 : 12;
     if (password.length < minLength) {
-      return `A senha deve ter no mínimo ${minLength} caracteres.`;
+      return this.i18n.t('error.passwordMinLength', { min: minLength });
     }
     if (!/[a-z]/.test(password)) {
-      return 'A senha deve conter pelo menos uma letra minúscula.';
+      return this.i18n.t('error.passwordLowercase');
     }
     if (!/[A-Z]/.test(password)) {
-      return 'A senha deve conter pelo menos uma letra maiúscula.';
+      return this.i18n.t('error.passwordUppercase');
     }
     if (!/[0-9]/.test(password)) {
-      return 'A senha deve conter pelo menos um número.';
+      return this.i18n.t('error.passwordNumber');
     }
     if (environment !== 'development' && !/[^A-Za-z0-9]/.test(password)) {
-      return 'A senha deve conter pelo menos um caractere especial.';
+      return this.i18n.t('error.passwordSpecial');
     }
     return null;
   }
@@ -81,23 +83,23 @@ export class AuthService {
     const name = (error as { name?: string })?.name;
     switch (name) {
       case 'InvalidParameterException':
-        return 'Informe um email válido.';
+        return this.i18n.t('error.invalidEmail');
       case 'CodeMismatchException':
-        return 'Código incorreto. Verifique e tente novamente.';
+        return this.i18n.t('error.codeMismatch');
       case 'ExpiredCodeException':
-        return 'Código expirado. Solicite um novo código.';
+        return this.i18n.t('error.codeExpired');
       case 'InvalidPasswordException':
-        return 'Senha não atende aos requisitos de segurança.';
+        return this.i18n.t('error.invalidPassword');
       case 'LimitExceededException':
-        return 'Muitas tentativas. Aguarde alguns minutos e tente novamente.';
+        return this.i18n.t('error.limitExceeded');
       case 'NotAuthorizedException':
-        return 'Email ou senha incorretos.';
+        return this.i18n.t('error.notAuthorized');
       case 'UserNotConfirmedException':
-        return 'Confirme seu email antes de entrar.';
+        return this.i18n.t('error.userNotConfirmed');
       case 'UsernameExistsException':
-        return 'Não foi possível concluir o cadastro. Tente novamente.';
+        return this.i18n.t('error.usernameExists');
       default:
-        return (error as { message?: string })?.message || 'Não foi possível concluir a operação. Tente novamente.';
+        return (error as { message?: string })?.message || this.i18n.t('error.operationFailed');
     }
   }
 
@@ -106,7 +108,6 @@ export class AuthService {
     return this.mapStep(isSignedIn, nextStep, email);
   }
 
-  // Confirma o codigo TOTP (tanto no setup inicial quanto no login subsequente).
   async confirmTotp(code: string): Promise<SignInResult> {
     const { isSignedIn, nextStep } = await confirmSignIn({ challengeResponse: code });
     return this.mapStep(isSignedIn, nextStep, this.userEmail());

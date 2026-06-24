@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { ConfigService } from '../../core/app-config';
+import { I18nService } from '../../core/i18n.service';
+import { TranslatePipe } from '../../core/translate.pipe';
+import { LanguageSelectorComponent } from '../../shared/language-selector.component';
 
 type Mode =
   | 'login'
@@ -16,7 +19,7 @@ type Mode =
 
 @Component({
   selector: 'app-auth',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe, LanguageSelectorComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss',
 })
@@ -24,6 +27,7 @@ export class AuthComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
   private config = inject(ConfigService);
+  private i18n = inject(I18nService);
 
   mode = signal<Mode>('login');
   loading = signal(false);
@@ -41,7 +45,6 @@ export class AuthComponent {
 
   environment = this.config.environment;
 
-  // QR code via servico publico (somente leitura do segredo otpauth).
   qrUrl(): string {
     const uri = this.totpUri();
     if (!uri) return '';
@@ -54,8 +57,8 @@ export class AuthComponent {
     this.infoMsg.set(null);
   }
 
-  private fail(e: unknown, fallback = 'Ocorreu um erro. Tente novamente.') {
-    this.errorMsg.set(this.auth.mapAuthError(e) || fallback);
+  private fail(e: unknown, fallbackKey = 'error.generic') {
+    this.errorMsg.set(this.auth.mapAuthError(e) || this.i18n.t(fallbackKey));
   }
 
   async doLogin() {
@@ -76,7 +79,7 @@ export class AuthComponent {
     this.errorMsg.set(null);
     try {
       await this.auth.register(this.email, this.password);
-      this.infoMsg.set('Enviamos um código de verificação para seu email.');
+      this.infoMsg.set(this.i18n.t('auth.info.verificationSent'));
       this.setMode('confirm');
     } catch (e) {
       this.fail(e);
@@ -90,7 +93,7 @@ export class AuthComponent {
     this.errorMsg.set(null);
     try {
       await this.auth.confirmRegistration(this.email, this.code);
-      this.infoMsg.set('Conta confirmada! Faça login para configurar o MFA.');
+      this.infoMsg.set(this.i18n.t('auth.info.accountConfirmed'));
       this.code = '';
       this.setMode('login');
     } catch (e) {
@@ -103,7 +106,7 @@ export class AuthComponent {
   async resend() {
     try {
       await this.auth.resendCode(this.email);
-      this.infoMsg.set('Novo código enviado.');
+      this.infoMsg.set(this.i18n.t('auth.info.codeResent'));
     } catch (e) {
       this.fail(e);
     }
@@ -115,9 +118,7 @@ export class AuthComponent {
     this.infoMsg.set(null);
     try {
       await this.auth.requestPasswordReset(this.email);
-      this.infoMsg.set(
-        'Se o email estiver cadastrado, enviaremos um código de verificação em instantes.',
-      );
+      this.infoMsg.set(this.i18n.t('auth.info.resetCodeSent'));
       this.code = '';
       this.newPassword = '';
       this.confirmPassword = '';
@@ -134,7 +135,7 @@ export class AuthComponent {
     this.errorMsg.set(null);
     try {
       await this.auth.requestPasswordReset(this.email);
-      this.infoMsg.set('Novo código enviado, se o email estiver cadastrado.');
+      this.infoMsg.set(this.i18n.t('auth.info.resetCodeResent'));
     } catch (e) {
       this.fail(e);
     } finally {
@@ -149,7 +150,7 @@ export class AuthComponent {
       return;
     }
     if (this.newPassword !== this.confirmPassword) {
-      this.errorMsg.set('As senhas informadas não coincidem.');
+      this.errorMsg.set(this.i18n.t('error.passwordMismatch'));
       return;
     }
 
@@ -207,11 +208,11 @@ export class AuthComponent {
         this.setMode('totp-confirm');
         break;
       case 'CONFIRM_SIGN_UP':
-        this.infoMsg.set('Confirme seu email para continuar.');
+        this.infoMsg.set(this.i18n.t('auth.info.confirmEmail'));
         this.setMode('confirm');
         break;
       default:
-        this.errorMsg.set('Não foi possível concluir o login.');
+        this.errorMsg.set(this.i18n.t('error.loginFailed'));
     }
   }
 }
