@@ -1,15 +1,18 @@
 <header class="navbar">
   <div class="brand">
     <span class="logo">🚗</span>
-    <span class="title">TestProject — Veículos</span>
+    <span class="title">{{ 'app.title' | t }}</span>
     <span class="env-badge" [class]="envClass()">{{ environment() }}</span>
   </div>
-  @if (auth.userEmail()) {
-    <div class="user">
-      <span class="email">{{ auth.userEmail() }}</span>
-      <button class="btn-ghost" (click)="logout()">Sair</button>
-    </div>
-  }
+  <div class="nav-actions">
+    <app-language-selector [dark]="true" />
+    @if (auth.userEmail()) {
+      <div class="user">
+        <span class="email">{{ auth.userEmail() }}</span>
+        <button class="btn-ghost" (click)="logout()">{{ 'app.logout' | t }}</button>
+      </div>
+    }
+  </div>
 </header>
 
 <main class="content">

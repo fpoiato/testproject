@@ -3,12 +3,12 @@
     <input
       class="search"
       type="search"
-      placeholder="Buscar (placa, marca, modelo, versão, cor, ano)…"
+      [placeholder]="'veiculos.search' | t"
       [ngModel]="search()"
       (ngModelChange)="search.set($event)"
     />
     <select [ngModel]="marcaFilter()" (ngModelChange)="marcaFilter.set($event)">
-      <option value="">Todas as marcas</option>
+      <option value="">{{ 'veiculos.allBrands' | t }}</option>
       @for (m of marcas(); track m) {
         <option [value]="m">{{ m }}</option>
       }
@@ -16,9 +16,9 @@
   </div>
   <div class="actions">
     <button class="btn-secondary" (click)="exportExcel()" [disabled]="!filtered().length">
-      ⬇ Exportar Excel
+      ⬇ {{ 'veiculos.export' | t }}
     </button>
-    <button class="btn-primary" (click)="openCreate()">+ Novo veículo</button>
+    <button class="btn-primary" (click)="openCreate()">+ {{ 'veiculos.new' | t }}</button>
   </div>
 </section>
 
@@ -27,19 +27,19 @@
 }
 
 @if (loading()) {
-  <p class="muted">Carregando…</p>
+  <p class="muted">{{ 'veiculos.loading' | t }}</p>
 } @else {
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
-          <th (click)="toggleSort('placa')">Placa {{ sortIndicator('placa') }}</th>
-          <th (click)="toggleSort('marca')">Marca {{ sortIndicator('marca') }}</th>
-          <th (click)="toggleSort('modelo')">Modelo {{ sortIndicator('modelo') }}</th>
-          <th (click)="toggleSort('versao')">Versão {{ sortIndicator('versao') }}</th>
-          <th (click)="toggleSort('cor')">Cor {{ sortIndicator('cor') }}</th>
-          <th (click)="toggleSort('ano')">Ano {{ sortIndicator('ano') }}</th>
-          <th class="col-actions">Ações</th>
+          <th (click)="toggleSort('placa')">{{ 'veiculos.col.plate' | t }} {{ sortIndicator('placa') }}</th>
+          <th (click)="toggleSort('marca')">{{ 'veiculos.col.brand' | t }} {{ sortIndicator('marca') }}</th>
+          <th (click)="toggleSort('modelo')">{{ 'veiculos.col.model' | t }} {{ sortIndicator('modelo') }}</th>
+          <th (click)="toggleSort('versao')">{{ 'veiculos.col.version' | t }} {{ sortIndicator('versao') }}</th>
+          <th (click)="toggleSort('cor')">{{ 'veiculos.col.color' | t }} {{ sortIndicator('cor') }}</th>
+          <th (click)="toggleSort('ano')">{{ 'veiculos.col.year' | t }} {{ sortIndicator('ano') }}</th>
+          <th class="col-actions">{{ 'veiculos.col.actions' | t }}</th>
         </tr>
       </thead>
       <tbody>
@@ -52,47 +52,47 @@
             <td>{{ v.cor }}</td>
             <td>{{ v.ano }}</td>
             <td class="col-actions">
-              <button class="btn-icon" (click)="openEdit(v)" title="Editar">✏️</button>
-              <button class="btn-icon" (click)="remove(v)" title="Excluir">🗑️</button>
+              <button class="btn-icon" (click)="openEdit(v)" [title]="'veiculos.edit' | t">✏️</button>
+              <button class="btn-icon" (click)="remove(v)" [title]="'veiculos.delete' | t">🗑️</button>
             </td>
           </tr>
         } @empty {
-          <tr><td colspan="7" class="muted center">Nenhum veículo encontrado.</td></tr>
+          <tr><td colspan="7" class="muted center">{{ 'veiculos.empty' | t }}</td></tr>
         }
       </tbody>
     </table>
   </div>
-  <p class="count">{{ filtered().length }} veículo(s)</p>
+  <p class="count">{{ 'veiculos.count' | t: { count: filtered().length } }}</p>
 }
 
 @if (showForm()) {
   <div class="modal-backdrop" (click)="closeForm()">
     <div class="modal" (click)="$event.stopPropagation()">
-      <h2>{{ editing() ? 'Editar' : 'Novo' }} veículo</h2>
+      <h2>{{ (editing() ? 'veiculos.form.edit' : 'veiculos.form.new') | t }} {{ 'veiculos.form.vehicle' | t }}</h2>
       @if (errorMsg()) { <div class="alert alert-error">{{ errorMsg() }}</div> }
       <form (ngSubmit)="save()">
-        <label>Placa
+        <label>{{ 'veiculos.form.plate' | t }}
           <input name="placa" [(ngModel)]="form.placa" required />
         </label>
-        <label>Marca
+        <label>{{ 'veiculos.form.brand' | t }}
           <input name="marca" [(ngModel)]="form.marca" required />
         </label>
-        <label>Modelo
+        <label>{{ 'veiculos.form.model' | t }}
           <input name="modelo" [(ngModel)]="form.modelo" required />
         </label>
-        <label>Versão
+        <label>{{ 'veiculos.form.version' | t }}
           <input name="versao" [(ngModel)]="form.versao" />
         </label>
-        <label>Cor
+        <label>{{ 'veiculos.form.color' | t }}
           <input name="cor" [(ngModel)]="form.cor" required />
         </label>
-        <label>Ano
+        <label>{{ 'veiculos.form.year' | t }}
           <input type="number" name="ano" [(ngModel)]="form.ano" required min="1900" />
         </label>
         <div class="modal-actions">
-          <button type="button" class="btn-secondary" (click)="closeForm()">Cancelar</button>
+          <button type="button" class="btn-secondary" (click)="closeForm()">{{ 'veiculos.form.cancel' | t }}</button>
           <button type="submit" class="btn-primary" [disabled]="saving()">
-            {{ saving() ? 'Salvando…' : 'Salvar' }}
+            {{ (saving() ? 'veiculos.form.saving' : 'veiculos.form.save') | t }}
           </button>
         </div>
       </form>
