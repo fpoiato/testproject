@@ -37,7 +37,8 @@ ainda os subdominios `app-blue` e `app-green` para validar cada cor antes do swi
 - **Frontend** (`frontend.tf`): S3 + CloudFront + certificado ACM + registros
   Route53 por ambiente, incluindo blue/green em producao.
 - **CI/CD** (`cicd.tf`): CodePipeline + CodeBuild por ambiente, com aprovacao
-  manual na producao.
+  manual na producao. Source via **AWS CodeConnections** (GitHub App) com
+  webhooks (`DetectChanges`), substituindo o GitHub v1 (OAuth/PAT + polling).
 
 ## Estado remoto
 
@@ -49,7 +50,7 @@ O state fica em S3 com lock em DynamoDB (`backend.tf`):
 
 ## Variaveis
 
-Todas as variaveis (`variables.tf`) tem `default`, exceto `github_oauth_token`.
+Todas as variaveis (`variables.tf`) tem `default`.
 
 | Variavel                       | Default       | Descricao                                            |
 |--------------------------------|---------------|------------------------------------------------------|
@@ -57,18 +58,20 @@ Todas as variaveis (`variables.tf`) tem `default`, exceto `github_oauth_token`.
 | `production_live_color`        | `blue`        | Cor ativa do blue/green de producao.                 |
 | `github_owner`                 | `fpoiato`     | Owner do repositorio.                                 |
 | `github_repo`                  | `testproject` | Nome do repositorio.                                  |
-| `github_oauth_token`           | (obrigatorio) | Token/PAT do GitHub para a source action do pipeline. |
 | `pipeline_alert_email`         | `nandopoiato@gmail.com` | Email de alerta de falha de pipeline.      |
 | `codebuild_log_retention_days` | `7`           | Retencao (dias) dos logs de CodeBuild.               |
 
-O `github_oauth_token` e fornecido via **`github.auto.tfvars`**, carregado
-automaticamente (sufixo `.auto.tfvars`) e ignorado pelo git (`*.auto.tfvars`
-no `.gitignore`). Crie-o localmente:
+### Conexao GitHub (CodeConnections)
 
-```hcl
-# infra/terraform/github.auto.tfvars
-github_oauth_token = "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
+O pipeline usa `aws_codestarconnections_connection` (`testproject-github`).
+Apos o primeiro `terraform apply`, autorize a conexao no console AWS:
+
+1. **Developer Tools** → **Settings** → **Connections**
+2. Selecione `testproject-github` (status **Pending**)
+3. **Update pending connection** → autorize o app GitHub da AWS
+
+Quando o status for **Available**, merges na branch disparam o pipeline via webhook
+(sem polling nem PAT no Terraform).
 
 ## Uso
 

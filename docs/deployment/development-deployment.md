@@ -8,8 +8,9 @@ The deployment to `development` is automatically triggered by:
 - Git push to the `development` branch
 - Merge of PR to `development` branch
 
-The source action uses GitHub v1 (OAuth) polling, so it may take up to ~1 minute
-after the push for the pipeline to start. You can also start it manually:
+The source action uses **AWS CodeConnections** (GitHub App) with webhooks
+(`DetectChanges`). After a merge, the pipeline should start within seconds.
+You can also start it manually:
 
 ```bash
 aws codepipeline start-pipeline-execution --name testproject-development
@@ -19,7 +20,7 @@ aws codepipeline start-pipeline-execution --name testproject-development
 
 ```
 GitHub (development branch)
-   |  (push/merge, polled)
+   |  (push/merge → webhook via CodeConnections)
 CodePipeline (testproject-development)
    |-- Source            -> artifact "src"
    `-- Build-Deploy (parallel)
@@ -40,7 +41,7 @@ CodePipeline (testproject-development)
 ## Deployment Configuration
 
 **CodePipeline:** `testproject-development` (one pipeline per environment,
-source = `development` branch).
+source = `development` branch via CodeConnections `testproject-github`).
 
 **CodeBuild Projects:**
 - Backend: `testproject-backend-development`
