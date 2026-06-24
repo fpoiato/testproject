@@ -8,6 +8,8 @@ import {
   getCurrentUser,
   fetchAuthSession,
   resendSignUpCode,
+  resetPassword,
+  confirmResetPassword,
 } from 'aws-amplify/auth';
 
 export interface SignInResult {
@@ -41,6 +43,62 @@ export class AuthService {
 
   async resendCode(email: string): Promise<void> {
     await resendSignUpCode({ username: email });
+  }
+
+  async requestPasswordReset(email: string): Promise<void> {
+    await resetPassword({ username: email });
+  }
+
+  async confirmPasswordReset(email: string, code: string, newPassword: string): Promise<void> {
+    await confirmResetPassword({
+      username: email,
+      confirmationCode: code,
+      newPassword,
+    });
+  }
+
+  validatePassword(password: string, environment: string): string | null {
+    const minLength = environment === 'development' ? 8 : 12;
+    if (password.length < minLength) {
+      return `A senha deve ter no mínimo ${minLength} caracteres.`;
+    }
+    if (!/[a-z]/.test(password)) {
+      return 'A senha deve conter pelo menos uma letra minúscula.';
+    }
+    if (!/[A-Z]/.test(password)) {
+      return 'A senha deve conter pelo menos uma letra maiúscula.';
+    }
+    if (!/[0-9]/.test(password)) {
+      return 'A senha deve conter pelo menos um número.';
+    }
+    if (environment !== 'development' && !/[^A-Za-z0-9]/.test(password)) {
+      return 'A senha deve conter pelo menos um caractere especial.';
+    }
+    return null;
+  }
+
+  mapAuthError(error: unknown): string {
+    const name = (error as { name?: string })?.name;
+    switch (name) {
+      case 'InvalidParameterException':
+        return 'Informe um email válido.';
+      case 'CodeMismatchException':
+        return 'Código incorreto. Verifique e tente novamente.';
+      case 'ExpiredCodeException':
+        return 'Código expirado. Solicite um novo código.';
+      case 'InvalidPasswordException':
+        return 'Senha não atende aos requisitos de segurança.';
+      case 'LimitExceededException':
+        return 'Muitas tentativas. Aguarde alguns minutos e tente novamente.';
+      case 'NotAuthorizedException':
+        return 'Email ou senha incorretos.';
+      case 'UserNotConfirmedException':
+        return 'Confirme seu email antes de entrar.';
+      case 'UsernameExistsException':
+        return 'Não foi possível concluir o cadastro. Tente novamente.';
+      default:
+        return (error as { message?: string })?.message || 'Não foi possível concluir a operação. Tente novamente.';
+    }
   }
 
   async login(email: string, password: string): Promise<SignInResult> {
