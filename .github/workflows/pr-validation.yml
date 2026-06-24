@@ -97,16 +97,17 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'npm'
+          cache-dependency-path: 'backend/package-lock.json'
 
-      - name: Install Test Dependencies
+      - name: Install Backend Dependencies
         run: |
-          npm install --save-dev jest @types/jest ts-jest
+          cd backend
+          npm ci
 
       - name: Run Backend Tests
         run: |
-          echo "Running unit tests for Lambda functions..."
-          npm test || echo "No backend tests yet - skipping"
-        continue-on-error: true
+          cd backend
+          npm test
 
   test-frontend:
     name: Frontend Unit Tests

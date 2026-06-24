@@ -4,7 +4,7 @@ import * as XLSX from 'xlsx';
 import { VeiculoService } from '../../core/veiculo.service';
 import { Veiculo } from '../../core/veiculo.model';
 
-type SortKey = keyof Pick<Veiculo, 'marca' | 'modelo' | 'versao' | 'cor' | 'ano'>;
+type SortKey = keyof Pick<Veiculo, 'placa' | 'marca' | 'modelo' | 'versao' | 'cor' | 'ano'>;
 
 @Component({
   selector: 'app-veiculos',
@@ -42,7 +42,7 @@ export class VeiculosComponent implements OnInit {
       const matchesMarca = !marca || v.marca === marca;
       const matchesTerm =
         !term ||
-        [v.marca, v.modelo, v.versao, v.cor, String(v.ano)]
+        [v.placa, v.marca, v.modelo, v.versao, v.cor, String(v.ano)]
           .filter(Boolean)
           .some((field) => String(field).toLowerCase().includes(term));
       return matchesMarca && matchesTerm;
@@ -94,7 +94,7 @@ export class VeiculosComponent implements OnInit {
   }
 
   private emptyForm(): Veiculo {
-    return { marca: '', modelo: '', versao: '', cor: '', ano: new Date().getFullYear() };
+    return { placa: '', marca: '', modelo: '', versao: '', cor: '', ano: new Date().getFullYear() };
   }
 
   openCreate() {
@@ -118,6 +118,7 @@ export class VeiculosComponent implements OnInit {
     this.saving.set(true);
     this.errorMsg.set(null);
     const payload: Veiculo = {
+      placa: this.form.placa,
       marca: this.form.marca,
       modelo: this.form.modelo,
       versao: this.form.versao,
@@ -158,6 +159,7 @@ export class VeiculosComponent implements OnInit {
 
   exportExcel() {
     const rows = this.filtered().map((v) => ({
+      Placa: v.placa,
       Marca: v.marca,
       Modelo: v.modelo,
       Versão: v.versao ?? '',

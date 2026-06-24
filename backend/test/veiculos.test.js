@@ -16,7 +16,7 @@ beforeEach(() => ddbMock.reset());
 
 describe('validate', () => {
   test('aceita veiculo completo e valido', () => {
-    expect(validate({ marca: 'VW', modelo: 'Golf', versao: 'GTI', cor: 'Preto', ano: 2020 })).toEqual([]);
+    expect(validate({ placa: 'ABC1D23', marca: 'VW', modelo: 'Golf', versao: 'GTI', cor: 'Preto', ano: 2020 })).toEqual([]);
   });
   test('rejeita campos obrigatorios ausentes', () => {
     const errors = validate({ versao: 'GTI' });
@@ -52,7 +52,7 @@ describe('createVeiculo', () => {
     ddbMock.on(PutCommand).resolves({});
     const res = await createVeiculo.handler({
       ...baseEvent,
-      body: JSON.stringify({ marca: 'Fiat', modelo: 'Uno', versao: 'Mille', cor: 'Branco', ano: 2015 }),
+      body: JSON.stringify({ placa: 'XYZ4E56', marca: 'Fiat', modelo: 'Uno', versao: 'Mille', cor: 'Branco', ano: 2015 }),
     });
     expect(res.statusCode).toBe(201);
     const body = JSON.parse(res.body);

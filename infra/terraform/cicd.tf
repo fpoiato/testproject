@@ -69,6 +69,7 @@ resource "aws_iam_role_policy" "codebuild" {
           "lambda:PublishVersion",
           "lambda:UpdateAlias",
           "lambda:GetFunction",
+          "lambda:GetFunctionConfiguration",
           "lambda:GetAlias",
         ]
         Resource = "arn:aws:lambda:${var.aws_region}:${local.account_id}:function:testproject-*"
