@@ -20,6 +20,9 @@
             {{ loading() ? 'Entrando…' : 'Entrar' }}
           </button>
         </form>
+        <p class="switch forgot-link">
+          <a (click)="setMode('forgot-request')">Esqueci minha senha</a>
+        </p>
         <p class="switch">Não tem conta?
           <a (click)="setMode('register')">Cadastre-se</a>
         </p>
@@ -80,6 +83,46 @@
           </label>
           <button class="btn-primary" type="submit" [disabled]="loading()">Verificar</button>
         </form>
+      }
+
+      @case ('forgot-request') {
+        <h2>Recuperar senha</h2>
+        <p class="hint">Informe o email cadastrado para receber um código de verificação.</p>
+        <form (ngSubmit)="requestPasswordReset()">
+          <label>Email
+            <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">
+            {{ loading() ? 'Enviando…' : 'Enviar código' }}
+          </button>
+        </form>
+        <p class="switch"><a (click)="backToLogin()">Voltar ao login</a></p>
+      }
+
+      @case ('forgot-confirm') {
+        <h2>Nova senha</h2>
+        <p class="hint">Informe o código recebido por email e escolha uma nova senha.</p>
+        <form (ngSubmit)="confirmPasswordReset()">
+          <label>Código de verificação
+            <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" />
+          </label>
+          <label>Nova senha
+            <input type="password" name="newPassword" [(ngModel)]="newPassword" required autocomplete="new-password" />
+          </label>
+          <label>Confirmar nova senha
+            <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required autocomplete="new-password" />
+          </label>
+          <button class="btn-primary" type="submit" [disabled]="loading()">
+            {{ loading() ? 'Salvando…' : 'Redefinir senha' }}
+          </button>
+        </form>
+        <p class="switch"><a (click)="resendPasswordReset()">Reenviar código</a></p>
+      }
+
+      @case ('forgot-success') {
+        <h2>Senha redefinida</h2>
+        <p class="hint">Sua senha foi alterada com sucesso. Faça login com a nova senha (incluindo MFA, se configurado).</p>
+        <button class="btn-primary" type="button" (click)="backToLogin()">Ir para o login</button>
       }
     }
   </div>
