@@ -1,128 +1,131 @@
 <div class="auth-wrap">
   <div class="auth-card">
-    <h1 class="auth-title">🚗 TestProject</h1>
-    <p class="auth-sub">Ambiente: <strong>{{ environment }}</strong></p>
+    <div class="auth-header">
+      <h1 class="auth-title">🚗 TestProject</h1>
+      <app-language-selector />
+    </div>
+    <p class="auth-sub">{{ 'auth.subtitle' | t }}: <strong>{{ environment }}</strong></p>
 
     @if (errorMsg()) { <div class="alert alert-error">{{ errorMsg() }}</div> }
     @if (infoMsg()) { <div class="alert alert-info">{{ infoMsg() }}</div> }
 
     @switch (mode()) {
       @case ('login') {
-        <h2>Entrar</h2>
+        <h2>{{ 'auth.login.title' | t }}</h2>
         <form (ngSubmit)="doLogin()">
-          <label>Email
+          <label>{{ 'auth.email' | t }}
             <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
           </label>
-          <label>Senha
+          <label>{{ 'auth.password' | t }}
             <input type="password" name="password" [(ngModel)]="password" required autocomplete="current-password" />
           </label>
           <button class="btn-primary" type="submit" [disabled]="loading()">
-            {{ loading() ? 'Entrando…' : 'Entrar' }}
+            {{ (loading() ? 'auth.login.submitting' : 'auth.login.submit') | t }}
           </button>
         </form>
         <p class="switch forgot-link">
-          <a (click)="setMode('forgot-request')">Esqueci minha senha</a>
+          <a (click)="setMode('forgot-request')">{{ 'auth.login.forgot' | t }}</a>
         </p>
-        <p class="switch">Não tem conta?
-          <a (click)="setMode('register')">Cadastre-se</a>
+        <p class="switch">{{ 'auth.login.noAccount' | t }}
+          <a (click)="setMode('register')">{{ 'auth.login.register' | t }}</a>
         </p>
       }
 
       @case ('register') {
-        <h2>Criar conta</h2>
+        <h2>{{ 'auth.register.title' | t }}</h2>
         <form (ngSubmit)="doRegister()">
-          <label>Email
+          <label>{{ 'auth.email' | t }}
             <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
           </label>
-          <label>Senha
+          <label>{{ 'auth.password' | t }}
             <input type="password" name="password" [(ngModel)]="password" required autocomplete="new-password" />
           </label>
           <button class="btn-primary" type="submit" [disabled]="loading()">
-            {{ loading() ? 'Enviando…' : 'Cadastrar' }}
+            {{ (loading() ? 'auth.register.submitting' : 'auth.register.submit') | t }}
           </button>
         </form>
-        <p class="switch">Já tem conta?
-          <a (click)="setMode('login')">Entrar</a>
+        <p class="switch">{{ 'auth.register.hasAccount' | t }}
+          <a (click)="setMode('login')">{{ 'auth.register.login' | t }}</a>
         </p>
       }
 
       @case ('confirm') {
-        <h2>Confirme seu email</h2>
+        <h2>{{ 'auth.confirm.title' | t }}</h2>
         <form (ngSubmit)="doConfirm()">
-          <label>Código de verificação
+          <label>{{ 'auth.confirm.code' | t }}
             <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" />
           </label>
-          <button class="btn-primary" type="submit" [disabled]="loading()">Confirmar</button>
+          <button class="btn-primary" type="submit" [disabled]="loading()">{{ 'auth.confirm.submit' | t }}</button>
         </form>
-        <p class="switch"><a (click)="resend()">Reenviar código</a></p>
+        <p class="switch"><a (click)="resend()">{{ 'auth.confirm.resend' | t }}</a></p>
       }
 
       @case ('totp-setup') {
-        <h2>Configurar MFA</h2>
-        <p class="hint">Escaneie o QR code com seu app autenticador (Google Authenticator, Authy, etc.) e informe o código gerado.</p>
+        <h2>{{ 'auth.totpSetup.title' | t }}</h2>
+        <p class="hint">{{ 'auth.totpSetup.hint' | t }}</p>
         @if (totpUri()) {
           <div class="qr"><img [src]="qrUrl()" alt="QR Code MFA" width="200" height="200" /></div>
         }
         @if (totpSecret()) {
-          <p class="secret">Chave manual: <code>{{ totpSecret() }}</code></p>
+          <p class="secret">{{ 'auth.totpSetup.manualKey' | t }}: <code>{{ totpSecret() }}</code></p>
         }
         <form (ngSubmit)="confirmTotp()">
-          <label>Código do app autenticador
+          <label>{{ 'auth.totpSetup.code' | t }}
             <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" />
           </label>
-          <button class="btn-primary" type="submit" [disabled]="loading()">Ativar e entrar</button>
+          <button class="btn-primary" type="submit" [disabled]="loading()">{{ 'auth.totpSetup.submit' | t }}</button>
         </form>
       }
 
       @case ('totp-confirm') {
-        <h2>Verificação MFA</h2>
-        <p class="hint">Informe o código atual do seu app autenticador.</p>
+        <h2>{{ 'auth.totpConfirm.title' | t }}</h2>
+        <p class="hint">{{ 'auth.totpConfirm.hint' | t }}</p>
         <form (ngSubmit)="confirmTotp()">
-          <label>Código
+          <label>{{ 'auth.totpConfirm.code' | t }}
             <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" autofocus />
           </label>
-          <button class="btn-primary" type="submit" [disabled]="loading()">Verificar</button>
+          <button class="btn-primary" type="submit" [disabled]="loading()">{{ 'auth.totpConfirm.submit' | t }}</button>
         </form>
       }
 
       @case ('forgot-request') {
-        <h2>Recuperar senha</h2>
-        <p class="hint">Informe o email cadastrado para receber um código de verificação.</p>
+        <h2>{{ 'auth.forgotRequest.title' | t }}</h2>
+        <p class="hint">{{ 'auth.forgotRequest.hint' | t }}</p>
         <form (ngSubmit)="requestPasswordReset()">
-          <label>Email
+          <label>{{ 'auth.email' | t }}
             <input type="email" name="email" [(ngModel)]="email" required autocomplete="username" />
           </label>
           <button class="btn-primary" type="submit" [disabled]="loading()">
-            {{ loading() ? 'Enviando…' : 'Enviar código' }}
+            {{ (loading() ? 'auth.register.submitting' : 'auth.forgotRequest.submit') | t }}
           </button>
         </form>
-        <p class="switch"><a (click)="backToLogin()">Voltar ao login</a></p>
+        <p class="switch"><a (click)="backToLogin()">{{ 'auth.forgotRequest.back' | t }}</a></p>
       }
 
       @case ('forgot-confirm') {
-        <h2>Nova senha</h2>
-        <p class="hint">Informe o código recebido por email e escolha uma nova senha.</p>
+        <h2>{{ 'auth.forgotConfirm.title' | t }}</h2>
+        <p class="hint">{{ 'auth.forgotConfirm.hint' | t }}</p>
         <form (ngSubmit)="confirmPasswordReset()">
-          <label>Código de verificação
+          <label>{{ 'auth.confirm.code' | t }}
             <input type="text" name="code" [(ngModel)]="code" required inputmode="numeric" />
           </label>
-          <label>Nova senha
+          <label>{{ 'auth.forgotConfirm.newPassword' | t }}
             <input type="password" name="newPassword" [(ngModel)]="newPassword" required autocomplete="new-password" />
           </label>
-          <label>Confirmar nova senha
+          <label>{{ 'auth.forgotConfirm.confirmPassword' | t }}
             <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required autocomplete="new-password" />
           </label>
           <button class="btn-primary" type="submit" [disabled]="loading()">
-            {{ loading() ? 'Salvando…' : 'Redefinir senha' }}
+            {{ (loading() ? 'auth.forgotConfirm.submitting' : 'auth.forgotConfirm.submit') | t }}
           </button>
         </form>
-        <p class="switch"><a (click)="resendPasswordReset()">Reenviar código</a></p>
+        <p class="switch"><a (click)="resendPasswordReset()">{{ 'auth.forgotConfirm.resend' | t }}</a></p>
       }
 
       @case ('forgot-success') {
-        <h2>Senha redefinida</h2>
-        <p class="hint">Sua senha foi alterada com sucesso. Faça login com a nova senha (incluindo MFA, se configurado).</p>
-        <button class="btn-primary" type="button" (click)="backToLogin()">Ir para o login</button>
+        <h2>{{ 'auth.forgotSuccess.title' | t }}</h2>
+        <p class="hint">{{ 'auth.forgotSuccess.hint' | t }}</p>
+        <button class="btn-primary" type="button" (click)="backToLogin()">{{ 'auth.forgotSuccess.login' | t }}</button>
       }
     }
   </div>
