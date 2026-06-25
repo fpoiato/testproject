@@ -1,0 +1,39 @@
+name: Trigger CodePipeline
+
+# Auto-deploy: on push to an environment branch, start the matching CodePipeline.
+# This replaces the CodeConnections push trigger, which was not delivering events.
+
+on:
+  push:
+    branches: [development, test, staging, production]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Map branch -> pipeline
+        id: map
+        run: |
+          case "${GITHUB_REF_NAME}" in
+            development) echo "pipeline=testproject-development" >> "$GITHUB_OUTPUT" ;;
+            test)        echo "pipeline=testproject-test"        >> "$GITHUB_OUTPUT" ;;
+            staging)     echo "pipeline=testproject-staging"     >> "$GITHUB_OUTPUT" ;;
+            production)  echo "pipeline=testproject-production"   >> "$GITHUB_OUTPUT" ;;
+            *) echo "No pipeline mapped for ${GITHUB_REF_NAME}"; exit 1 ;;
+          esac
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::986873053420:role/testproject-gha-codepipeline-trigger
+          aws-region: us-east-1
+
+      - name: Start pipeline execution
+        run: |
+          aws codepipeline start-pipeline-execution \
+            --name "${{ steps.map.outputs.pipeline }}" \
+            --region us-east-1
